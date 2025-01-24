@@ -90,7 +90,18 @@ namespace mRemoteNG.Tools
 		
         public Icon Icon
         {
-            get { return File.Exists(FileName) ? MiscTools.GetIconFromFile(FileName) : Resources.mRemote_Icon; }
+            get {
+                if (File.Exists(this.FileName))
+                {
+                    return MiscTools.GetIconFromFile(this.FileName);
+                }
+                Icon icon = ConnectionIcon.FromString(Path.GetFileNameWithoutExtension(this.FileName));
+                if (icon != null)
+                {
+                    return icon;
+                }
+                return Resources.mRemote_Icon;
+			}
         }
 
 	    public Image Image
