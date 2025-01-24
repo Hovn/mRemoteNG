@@ -22,7 +22,7 @@ namespace mRemoteNG.App.Initialization
             if (Directory.Exists(_path) == false)
                 return;
 
-            foreach (var f in Directory.GetFiles(_path, "*.ico", SearchOption.AllDirectories))
+            foreach (var f in Directory.GetFiles(_path, "*.ico", SearchOption.TopDirectoryOnly))
             {
                 var fInfo = new FileInfo(f);
                 Array.Resize(ref ConnectionIcon.Icons, ConnectionIcon.Icons.Length + 1);
