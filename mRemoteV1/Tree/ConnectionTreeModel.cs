@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
@@ -52,7 +53,15 @@ namespace mRemoteNG.Tree
 
             connectionInfo.Name = newName;
             if (Settings.Default.SetHostnameLikeDisplayName)
-                connectionInfo.Hostname = newName;
+            {
+                string pattern = "\\d{1,3}(\\.\\d{1,3}){3}";
+                Match match = Regex.Match(newName, pattern);
+                if (match.Success)
+                {
+                    connectionInfo.Hostname = match.Value;
+                }
+                //connectionInfo.Hostname = newName;
+            }
         }
 
         public void DeleteNode(ConnectionInfo connectionInfo)
