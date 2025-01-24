@@ -21,7 +21,7 @@ namespace mRemoteNG.Tools
 	    private string _arguments;
 	    private string _workingDir;
 	    private bool _tryIntegrate;
-	    private bool _showOnToolbar = true;
+	    private bool _showOnToolbar = false;
 	    private bool _runElevated;
 
 	    #region Public Properties
