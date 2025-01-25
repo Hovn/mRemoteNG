@@ -2191,7 +2191,7 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="strMenuReconnectAll" xml:space="preserve">
     <value>Переподключить все открытые соединения</value>
   </data>
-  <data name="srtWorkingDirectory" xml:space="preserve">
+  <data name="strWorkingDirectory" xml:space="preserve">
     <value>Рабочий каталог:</value>
   </data>
   <data name="strButtonLaunch" xml:space="preserve">

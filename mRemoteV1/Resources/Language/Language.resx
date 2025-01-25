@@ -2634,7 +2634,7 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strTimeoutInSeconds" xml:space="preserve">
     <value>Timeout (seconds)</value>
   </data>
-  <data name="srtWorkingDirectory" xml:space="preserve">
+  <data name="strWorkingDirectory" xml:space="preserve">
     <value>Working directory:</value>
   </data>
   <data name="strRunElevated" xml:space="preserve">

@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Window
 	        DisplayNameLabel.Text = Language.strLabelDisplayName;
 	        FilenameLabel.Text = Language.strLabelFilename;
 	        ArgumentsLabel.Text = Language.strLabelArguments;
-            WorkingDirLabel.Text = Language.srtWorkingDirectory;
+            WorkingDirLabel.Text = Language.strWorkingDirectory;
             OptionsLabel.Text = Language.strLabelOptions;
             
 	        WaitForExitCheckBox.Text = Language.strCheckboxWaitForExit;

@@ -243,9 +243,9 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Working directory:.
         /// </summary>
-        internal static string srtWorkingDirectory {
+        internal static string strWorkingDirectory {
             get {
-                return ResourceManager.GetString("srtWorkingDirectory", resourceCulture);
+                return ResourceManager.GetString("strWorkingDirectory", resourceCulture);
             }
         }
         
