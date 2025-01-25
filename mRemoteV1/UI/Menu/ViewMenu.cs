@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
 
@@ -399,7 +400,13 @@ namespace mRemoteNG.UI.Menu
 
 		private void mMenViewAddConnectionPanel_Click(object sender, EventArgs e)
         {
-            _panelAdder.AddPanel();
+            string strNewPanel = Language.strNewPanel;
+            if (input.InputBox(Language.strNewPanel, Language.strPanelName, ref strNewPanel) == DialogResult.OK && !string.IsNullOrEmpty(strNewPanel))
+            {
+                this._panelAdder.AddPanel(strNewPanel, false);
+            }
+
+            //_panelAdder.AddPanel();
         }
 
         private void mMenViewExtAppsToolbar_Click(object sender, EventArgs e)
