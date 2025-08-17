@@ -156,7 +156,7 @@ namespace mRemoteNG.UI.TaskDialog
                     rb.Text = arr[i];
                     rb.Tag = i;
                     rb.Checked = (DefaultButtonIndex == i);
-                    rb.Width = Width - rb.Left - 15;
+                    rb.Width = Width - rb.Left - 30;
                     pnl_height += rb.Height;
                     _radioButtonCtrls.Add(rb);
                 }
@@ -179,7 +179,7 @@ namespace mRemoteNG.UI.TaskDialog
                     if (_isVista)  // <- tweak font if vista
                         btn.Font = new Font(btn.Font, FontStyle.Regular);
                     btn.Text = arr[i];
-                    btn.Size = new Size(Width - btn.Left - 15, btn.GetBestHeight());
+                    btn.Size = new Size(Width - btn.Left - 30, btn.GetBestHeight());
                     t += btn.Height;
                     pnl_height += btn.Height;
                     btn.Tag = i;
