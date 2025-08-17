@@ -62,7 +62,9 @@ namespace mRemoteNG.UI.Panels
             var cMen = new ContextMenuStrip();
             var cMenRen = CreateRenameMenuItem(pnlcForm);
             var cMenScreens = CreateScreensMenuItem(pnlcForm);
-            cMen.Items.AddRange(new ToolStripItem[] { cMenRen, cMenScreens });
+            //CBH 标签右键中增加关闭菜单
+            var cMenClose = CreateCloseMenuItem(pnlcForm);
+            cMen.Items.AddRange(new ToolStripItem[] { cMenRen, cMenScreens, cMenClose });
             pnlcForm.TabPageContextMenuStrip = cMen;
         }
 
@@ -164,5 +166,31 @@ namespace mRemoteNG.UI.Panels
                 Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelScreen_Click: Caught Exception: ", ex);
             }
         }
+
+        private static ToolStripMenuItem CreateCloseMenuItem(DockContent pnlcForm)
+        {
+            var cMenClose = new ToolStripMenuItem
+            {
+                Text = Language.strClose,
+                Image = Resources.Delete,
+                Tag = pnlcForm
+            };
+            cMenClose.Click += cMenConnectionPanelClose_Click;
+            return cMenClose;
+        }
+
+        private static void cMenConnectionPanelClose_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ((ConnectionWindow)((ToolStripMenuItem)sender).Tag).Close();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelClose_Click: Caught Exception: ", ex);
+                //Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelClose_Click: Caught Exception: ", ex, MessageClass.ErrorMsg, true);
+            }
+        }
+
     }
 }
