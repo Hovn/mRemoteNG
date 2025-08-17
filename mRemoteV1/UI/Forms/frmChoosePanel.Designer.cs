@@ -42,15 +42,15 @@ namespace mRemoteNG.UI.Forms
             this.cbPanels.FormattingEnabled = true;
             this.cbPanels.Location = new System.Drawing.Point(12, 42);
             this.cbPanels.Name = "cbPanels";
-            this.cbPanels.Size = new System.Drawing.Size(224, 21);
+            this.cbPanels.Size = new System.Drawing.Size(224, 28);
             this.cbPanels.TabIndex = 10;
             // 
             // btnOK
             // 
             this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnOK.Location = new System.Drawing.Point(167, 72);
+            this.btnOK.Location = new System.Drawing.Point(220, 100);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(69, 23);
+            this.btnOK.Size = new System.Drawing.Size(77, 30);
             this.btnOK.TabIndex = 20;
             this.btnOK.Text = global::mRemoteNG.Language.strButtonOK;
             this.btnOK.UseVisualStyleBackColor = true;
@@ -60,7 +60,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.lblDescription.Location = new System.Drawing.Point(7, 8);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(229, 29);
+            this.lblDescription.Size = new System.Drawing.Size(289, 30);
             this.lblDescription.TabIndex = 0;
             this.lblDescription.Text = "Select a panel from the list below or click New to add a new one. Click OK to con" +
     "tinue.";
@@ -69,13 +69,24 @@ namespace mRemoteNG.UI.Forms
             // 
             this.btnNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnNew.Image = global::mRemoteNG.Resources.Panel_Add;
-            this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(101, 70);
+            this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnNew.Location = new System.Drawing.Point(244, 42);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(60, 27);
+            this.btnNew.Size = new System.Drawing.Size(50, 28);
             this.btnNew.TabIndex = 40;
+            //ORI
             this.btnNew.Text = global::mRemoteNG.Language.strButtonNew;
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+
+            //CBH 
+            this.btnNew.Text = null;
+            //if (this.btnNew.Width > 75)
+            //{
+            //    this.btnNew.ImageAlign = global::System.Drawing.ContentAlignment.MiddleLeft;
+            //    this.btnNew.Text = global::mRemoteNG.Language.strButtonNew;
+            //    this.btnNew.TextAlign = global::System.Drawing.ContentAlignment.MiddleRight;
+            //}
+
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -84,7 +95,7 @@ namespace mRemoteNG.UI.Forms
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(245, 107);
+            this.ClientSize = new System.Drawing.Size(305, 137);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.btnOK);
@@ -97,6 +108,9 @@ namespace mRemoteNG.UI.Forms
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Panel";
+            //CBH
+            this.Font = new global::System.Drawing.Font("Segoe UI", 8.25f, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point, global::System.Convert.ToByte(0));
+
             this.Load += new System.EventHandler(this.frmChoosePanel_Load);
             this.ResumeLayout(false);
 

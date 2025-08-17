@@ -12,7 +12,10 @@ namespace mRemoteNG.UI.Controls
                 throw new ArgumentNullException(nameof(message));
 
             ImageIndex = Convert.ToInt32(message.Class);
-            Text = message.Text.Replace(Environment.NewLine, "  ");
+            //Text = message.Text.Replace(Environment.NewLine, "  ");
+            //CBH 消息开头显示时间戳
+            Text = message.Date.ToString("yyyy-MM-dd HH:mm:ss") + ": " + message.Text.Replace(Environment.NewLine, "  ");
+
             Tag = message;
         }
     }

@@ -132,7 +132,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // label3
             // 
-            label3.Location = new System.Drawing.Point(23, 1);
+            label3.Location = new System.Drawing.Point(23, 2);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(8, 13);
             label3.TabIndex = 6;
@@ -149,7 +149,7 @@ namespace mRemoteNG.UI.Controls
             // Octet4
             // 
             Octet4.BackColor = System.Drawing.SystemColors.Menu;
-            Octet4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            Octet4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             Octet4.Font = new System.Drawing.Font("Segoe UI", 9F);
             Octet4.Location = new System.Drawing.Point(95, 1);
             Octet4.MaxLength = 3;
@@ -164,7 +164,7 @@ namespace mRemoteNG.UI.Controls
             // Octet3
             // 
             Octet3.BackColor = System.Drawing.SystemColors.Menu;
-            Octet3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            Octet3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             Octet3.Font = new System.Drawing.Font("Segoe UI", 9F);
             Octet3.Location = new System.Drawing.Point(63, 1);
             Octet3.MaxLength = 3;
@@ -179,7 +179,7 @@ namespace mRemoteNG.UI.Controls
             // Octet2
             // 
             Octet2.BackColor = System.Drawing.SystemColors.Menu;
-            Octet2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            Octet2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             Octet2.Font = new System.Drawing.Font("Segoe UI", 9F);
             Octet2.Location = new System.Drawing.Point(32, 1);
             Octet2.MaxLength = 3;
@@ -202,7 +202,7 @@ namespace mRemoteNG.UI.Controls
             // Octet1
             // 
             Octet1.BackColor = System.Drawing.SystemColors.Menu;
-            Octet1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            Octet1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             Octet1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             Octet1.Location = new System.Drawing.Point(1, 1);
             Octet1.MaxLength = 3;

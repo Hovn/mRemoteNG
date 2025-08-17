@@ -11,8 +11,11 @@ namespace mRemoteNG.UI.Window
 		internal Controls.Base.NGLabel lblEndIP;
 		internal Controls.Base.NGLabel lblStartIP;
 		internal Controls.Base.NGButton btnScan;
-		internal IPTextBox ipEnd;
-		internal Controls.Base.NGListView olvHosts;
+        //internal IPTextBox ipStart;
+        //internal IPTextBox ipEnd;
+        internal global::mRemoteNG.UI.Controls.Base.NGTextBox ipStart;
+        internal global::mRemoteNG.UI.Controls.Base.NGTextBox ipEnd;
+        internal Controls.Base.NGListView olvHosts;
 		internal BrightIdeasSoftware.OLVColumn clmHost;
 		internal BrightIdeasSoftware.OLVColumn clmSSH;
 		internal BrightIdeasSoftware.OLVColumn clmTelnet;
@@ -32,14 +35,13 @@ namespace mRemoteNG.UI.Window
 		internal Controls.Base.NGLabel Label2;
 		internal Controls.Base.NGLabel Label1;
 		internal Controls.Base.NGButton btnImport;
-		internal IPTextBox ipStart;
 				
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PortScanWindow));
-            this.ipStart = new mRemoteNG.UI.Controls.IPTextBox();
-            this.ipEnd = new mRemoteNG.UI.Controls.IPTextBox();
+            this.ipStart = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.ipEnd = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblStartIP = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.lblEndIP = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.btnScan = new mRemoteNG.UI.Controls.Base.NGButton();
@@ -85,24 +87,24 @@ namespace mRemoteNG.UI.Window
             // 
             // ipStart
             // 
-            this.ipStart.Location = new System.Drawing.Point(5, 19);
+            this.ipStart.Location = new System.Drawing.Point(5, 20);
             this.ipStart.Name = "ipStart";
             this.ipStart.Size = new System.Drawing.Size(130, 20);
             this.ipStart.TabIndex = 1;
-            this.ipStart.ToolTipText = "";
+            //this.ipStart.ToolTipText = "";
             // 
             // ipEnd
             // 
-            this.ipEnd.Location = new System.Drawing.Point(155, 19);
+            this.ipEnd.Location = new System.Drawing.Point(155, 20);
             this.ipEnd.Name = "ipEnd";
             this.ipEnd.Size = new System.Drawing.Size(130, 20);
             this.ipEnd.TabIndex = 2;
-            this.ipEnd.ToolTipText = "";
+            //this.ipEnd.ToolTipText = "";
             // 
             // lblStartIP
             // 
             this.lblStartIP.AutoSize = true;
-            this.lblStartIP.Location = new System.Drawing.Point(3, 5);
+            this.lblStartIP.Location = new System.Drawing.Point(3, 1);
             this.lblStartIP.Name = "lblStartIP";
             this.lblStartIP.Size = new System.Drawing.Size(46, 13);
             this.lblStartIP.TabIndex = 0;
@@ -111,7 +113,7 @@ namespace mRemoteNG.UI.Window
             // lblEndIP
             // 
             this.lblEndIP.AutoSize = true;
-            this.lblEndIP.Location = new System.Drawing.Point(152, 5);
+            this.lblEndIP.Location = new System.Drawing.Point(152, 1);
             this.lblEndIP.Name = "lblEndIP";
             this.lblEndIP.Size = new System.Drawing.Size(42, 13);
             this.lblEndIP.TabIndex = 5;
@@ -145,7 +147,7 @@ namespace mRemoteNG.UI.Window
             this.olvHosts.GridLines = true;
             this.olvHosts.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.olvHosts.HideSelection = false;
-            this.olvHosts.Location = new System.Drawing.Point(12, 73);
+            this.olvHosts.Location = new System.Drawing.Point(12, 88);
             this.olvHosts.Name = "olvHosts";
             this.olvHosts.ShowGroups = false;
             this.olvHosts.Size = new System.Drawing.Size(883, 290);
@@ -323,9 +325,9 @@ namespace mRemoteNG.UI.Window
             // 
             this.prgBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.prgBar.Location = new System.Drawing.Point(5, 45);
+            this.prgBar.Location = new System.Drawing.Point(5, 52);
             this.prgBar.Name = "prgBar";
-            this.prgBar.Size = new System.Drawing.Size(760, 15);
+            this.prgBar.Size = new System.Drawing.Size(760, 16);
             this.prgBar.Step = 1;
             this.prgBar.TabIndex = 28;
             // 
@@ -347,12 +349,12 @@ namespace mRemoteNG.UI.Window
             this.pnlScan.Controls.Add(this.ipEnd);
             this.pnlScan.Location = new System.Drawing.Point(12, 5);
             this.pnlScan.Name = "pnlScan";
-            this.pnlScan.Size = new System.Drawing.Size(883, 65);
+            this.pnlScan.Size = new System.Drawing.Size(883, 68);
             this.pnlScan.TabIndex = 18;
             // 
             // numericSelectorTimeout
             // 
-            this.numericSelectorTimeout.Location = new System.Drawing.Point(600, 17);
+            this.numericSelectorTimeout.Location = new System.Drawing.Point(600, 20);
             this.numericSelectorTimeout.Maximum = new decimal(new int[] {
             2147482,
             0,
@@ -373,7 +375,7 @@ namespace mRemoteNG.UI.Window
             // 
             // portEnd
             // 
-            this.portEnd.Location = new System.Drawing.Point(490, 17);
+            this.portEnd.Location = new System.Drawing.Point(490, 20);
             this.portEnd.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -386,7 +388,7 @@ namespace mRemoteNG.UI.Window
             // 
             // portStart
             // 
-            this.portStart.Location = new System.Drawing.Point(375, 17);
+            this.portStart.Location = new System.Drawing.Point(375, 20);
             this.portStart.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -424,7 +426,7 @@ namespace mRemoteNG.UI.Window
             this.pnlImport.Controls.Add(this.cbProtocol);
             this.pnlImport.Location = new System.Drawing.Point(12, 364);
             this.pnlImport.Name = "pnlImport";
-            this.pnlImport.Size = new System.Drawing.Size(883, 50);
+            this.pnlImport.Size = new System.Drawing.Size(883, 58);
             this.pnlImport.TabIndex = 102;
             // 
             // PortScanWindow

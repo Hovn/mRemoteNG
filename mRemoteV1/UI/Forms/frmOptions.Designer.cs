@@ -139,15 +139,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 527);
+            this.ClientSize = new System.Drawing.Size(796, 636);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.lstOptionPages);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlBottom);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            //CBH 设置窗口类型为可调大小，可最大化
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
+            this.MaximizeBox = true;
             this.Name = "frmOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mRemoteNG Options";

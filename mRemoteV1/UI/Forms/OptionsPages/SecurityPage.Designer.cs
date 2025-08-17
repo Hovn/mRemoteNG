@@ -101,7 +101,8 @@
             this.groupAdvancedSecurityOptions.Controls.Add(this.labelEncryptionEngine);
             this.groupAdvancedSecurityOptions.Location = new System.Drawing.Point(3, 30);
             this.groupAdvancedSecurityOptions.Name = "groupAdvancedSecurityOptions";
-            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(604, 128);
+            //CBH 配置组的外框的宽度改小，适配设置对话框的宽度
+            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(500, 128);
             this.groupAdvancedSecurityOptions.TabIndex = 1;
             this.groupAdvancedSecurityOptions.TabStop = false;
             this.groupAdvancedSecurityOptions.Text = "Advanced Security Options";

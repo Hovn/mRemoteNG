@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
@@ -479,7 +481,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeDisconnect.Enabled = true;
 
             _cMenTreeToolsTransferFile.Enabled = false;
-            _cMenTreeToolsExternalApps.Enabled = false;
+            _cMenTreeToolsExternalApps.Enabled = true;  //CBH 容器也可以使用外部工具
         }
 
         internal void ShowHideMenuItemsForPuttyNode(ConnectionInfo connectionInfo)
@@ -574,7 +576,8 @@ namespace mRemoteNG.UI.Controls
                         Tag = extA,
                         Image = extA.Image
                     };
-
+                    //CBH 字体：连接项右键外部工具菜单可使用自定义字体
+                    menuItem.Font = Settings.GetCustomFont(Settings.Default.ConnectionTreeWindowExtAppsMenuFont);
                     menuItem.Click += OnExternalToolClicked;
                     _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
                 }
@@ -686,6 +689,20 @@ namespace mRemoteNG.UI.Controls
 
         private void OnTransferFileClicked(object sender, EventArgs e)
         {
+            //CBH 文件传输(SSH) 菜单 使用自定义的传输工具，配置成某个外部工具的名字，比如 WinSCP
+            //非SSH协议的节点，菜单会默认置灰，不可使用
+            string connectionTreeWindowSSHTransferFileMenuUse = Settings.Default.ConnectionTreeWindowSSHTransferFileMenuUse;
+            if (!string.IsNullOrEmpty(connectionTreeWindowSSHTransferFileMenuUse) && connectionTreeWindowSSHTransferFileMenuUse != "Default")
+            {
+                ConnectionInfo selectedNode = this._connectionTree.SelectedNode;
+                ExternalTool extAppByName = Runtime.ExternalToolsService.GetExtAppByName(connectionTreeWindowSSHTransferFileMenuUse);
+                if (extAppByName != null)
+                {
+                    extAppByName.Start(selectedNode);
+                    return;
+                }
+            }
+
             SshTransferFile();
         }
 
@@ -777,15 +794,53 @@ namespace mRemoteNG.UI.Controls
 
         private void OnExternalToolClicked(object sender, EventArgs e)
         {
-            StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+            //ORI
+            //StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+            //CBH 入参增加选中的节点
+            StartExternalApp_CBH((ExternalTool)((ToolStripMenuItem)sender).Tag, _connectionTree.SelectedNode);
         }
 
+        //原始方法
         private void StartExternalApp(ExternalTool externalTool)
         {
             try
             {
                 if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Connection | _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession)
                     externalTool.Start(_connectionTree.SelectedNode);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)", ex);
+            }
+        }
+
+        //CBH 修改：如果是在容器上执行外部工具，则循环子节点逐一执行外部工具。
+        //保留 2 s 延迟逻辑；若将来需要并发启动，可再把 Delay 换成 SemaphoreSlim 等。
+        //方法签名仍然保持 async void，因为看起来是事件处理器；如果是普通业务方法，建议改为 async Task。
+        private async void StartExternalApp_CBH(ExternalTool externalTool, ConnectionInfo node)
+        {
+            try
+            {
+                TreeNodeType nodeType = node.GetTreeNodeType();
+                // 1. 处理容器分支
+                if (node is ContainerInfo container && nodeType == TreeNodeType.Container)
+                {
+                    if (container.Children.Count == 0)
+                        return;
+
+                    foreach (ConnectionInfo child in container.Children)
+                    {
+                        StartExternalApp_CBH(externalTool, child);   // 递归
+                        await Task.Delay(2000);                      // 每启动一个等待 2 s （后续计划使用配置文件配置）
+                    }
+                    //return;
+                }
+
+                // 2. 处理普通连接或 PuTTY 会话
+                else if (nodeType == TreeNodeType.Connection || nodeType == TreeNodeType.PuttySession)
+                {
+                    externalTool.Start(node);
+                }
             }
             catch (Exception ex)
             {

@@ -5,22 +5,24 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.UI.Window
 {
-	public partial class ConnectionTreeWindow : BaseWindow
-	{
+    public partial class ConnectionTreeWindow : BaseWindow
+    {
         #region  Windows Form Designer generated code
-		internal Controls.Base.NGTextBox txtSearch;
-		internal System.Windows.Forms.Panel pnlConnections;
-		internal System.Windows.Forms.MenuStrip msMain;
-		internal System.Windows.Forms.ToolStripMenuItem mMenView;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewExpandAllFolders;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewCollapseAllFolders;
-		internal System.Windows.Forms.PictureBox PictureBox1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenSortAscending;
-		internal System.Windows.Forms.ToolStripMenuItem mMenAddConnection;
-		internal System.Windows.Forms.ToolStripMenuItem mMenAddFolder;
-		public System.Windows.Forms.TreeView tvConnections;
-		private void InitializeComponent()
-		{
+        internal Controls.Base.NGTextBox txtSearch;
+        internal System.Windows.Forms.Panel pnlConnections;
+        internal System.Windows.Forms.MenuStrip msMain;
+        internal System.Windows.Forms.ToolStripMenuItem mMenView;
+        internal System.Windows.Forms.ToolStripMenuItem mMenViewExpandAllFolders;
+        internal System.Windows.Forms.ToolStripMenuItem mMenViewCollapseAllFolders;
+        internal System.Windows.Forms.PictureBox PictureBox1;
+        internal System.Windows.Forms.ToolStripMenuItem mMenSortAscending;
+        internal System.Windows.Forms.ToolStripMenuItem mMenAddConnection;
+        internal System.Windows.Forms.ToolStripMenuItem mMenAddFolder;
+        internal System.Windows.Forms.ToolStripMenuItem mMenDropOpt;
+
+        public System.Windows.Forms.TreeView tvConnections;
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             mRemoteNG.Tree.TreeNodeCompositeClickHandler treeNodeCompositeClickHandler1 = new mRemoteNG.Tree.TreeNodeCompositeClickHandler();
             mRemoteNG.Tree.AlwaysConfirmYes alwaysConfirmYes1 = new mRemoteNG.Tree.AlwaysConfirmYes();
@@ -36,6 +38,10 @@ namespace mRemoteNG.UI.Window
             this.mMenViewExpandAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSortAscending = new System.Windows.Forms.ToolStripMenuItem();
+            //CBH 增加启用/禁用拖拽的开关
+            this.mMenDropOpt = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenDropOpt.CheckOnClick = true;
+
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).BeginInit();
             this.pnlConnections.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
@@ -48,9 +54,11 @@ namespace mRemoteNG.UI.Window
             // 
             // olvConnections
             // 
-            this.olvConnections.AllowDrop = true;
-            this.olvConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.olvConnections.AllowDrop = false; //CBH 默认改为不允许拖拽
+            this.olvConnections.RowHeight = global::mRemoteNG.Settings.Default.ConnectionTreeRowHeight;//条目高度
+
+            this.olvConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvConnections.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.olvConnections.CellEditUseWholeCell = false;
@@ -72,7 +80,7 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.ShowGroups = false;
             treeNodeCompositeClickHandler2.ClickHandlers = new mRemoteNG.Tree.ITreeNodeClickHandler<ConnectionInfo>[0];
             this.olvConnections.SingleClickHandler = treeNodeCompositeClickHandler2;
-            this.olvConnections.Size = new System.Drawing.Size(192, 410);
+            this.olvConnections.Size = new System.Drawing.Size(192, 404);
             this.olvConnections.TabIndex = 20;
             this.olvConnections.UnfocusedSelectedBackColor = System.Drawing.SystemColors.Highlight;
             this.olvConnections.UnfocusedSelectedForeColor = System.Drawing.SystemColors.HighlightText;
@@ -83,8 +91,8 @@ namespace mRemoteNG.UI.Window
             // 
             // pnlConnections
             // 
-            this.pnlConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlConnections.Controls.Add(this.PictureBox1);
             this.pnlConnections.Controls.Add(this.txtSearch);
@@ -98,22 +106,22 @@ namespace mRemoteNG.UI.Window
             // 
             this.PictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PictureBox1.Image = global::mRemoteNG.Resources.Search;
-            this.PictureBox1.Location = new System.Drawing.Point(2, 412);
+            this.PictureBox1.Location = new System.Drawing.Point(2, 407);
             this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(16, 16);
+            this.PictureBox1.Size = new System.Drawing.Size(20, 20);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.PictureBox1.TabIndex = 1;
             this.PictureBox1.TabStop = false;
             // 
             // txtSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSearch.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.txtSearch.Location = new System.Drawing.Point(19, 413);
+            this.txtSearch.Location = new System.Drawing.Point(20, 407);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(171, 15);
+            this.txtSearch.Size = new System.Drawing.Size(152, 20);
             this.txtSearch.TabIndex = 30;
             this.txtSearch.TabStop = false;
             this.txtSearch.Text = "Search";
@@ -124,12 +132,17 @@ namespace mRemoteNG.UI.Window
             // 
             // msMain
             // 
-            this.msMain.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //this.msMain.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //CBH 字体
+            this.msMain.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ConnectionTreeWindowFont);
+
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenAddConnection,
-            this.mMenAddFolder,
-            this.mMenView,
-            this.mMenSortAscending});
+                this.mMenAddConnection,
+                this.mMenAddFolder,
+                this.mMenView,
+                //this.mMenSortAscending  //CBH 取消排序按钮
+                this.mMenDropOpt
+            });
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
             this.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -185,13 +198,25 @@ namespace mRemoteNG.UI.Window
             this.mMenSortAscending.Image = global::mRemoteNG.Resources.Sort_AZ;
             this.mMenSortAscending.Name = "mMenSortAscending";
             this.mMenSortAscending.Size = new System.Drawing.Size(28, 20);
+
+            //
+            // mMenDropOpt  CBH 增加拖拽开关按钮
+            //
+            this.mMenDropOpt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mMenDropOpt.Image = global::mRemoteNG.Resources.Drag_Icon_Disable;
+            this.mMenDropOpt.Name = "mMenDropOpt";
+            this.mMenDropOpt.Size = new System.Drawing.Size(28, 20);
+
             // 
             // ConnectionTreeWindow
             // 
             this.ClientSize = new System.Drawing.Size(192, 453);
             this.Controls.Add(this.msMain);
             this.Controls.Add(this.pnlConnections);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //CBH
+            this.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ConnectionTreeWindowFont);
+
             this.HideOnClose = true;
             this.Icon = global::mRemoteNG.Resources.Root_Icon;
             this.Name = "ConnectionTreeWindow";
@@ -207,7 +232,7 @@ namespace mRemoteNG.UI.Window
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
+        }
         #endregion
 
         private System.ComponentModel.IContainer components;

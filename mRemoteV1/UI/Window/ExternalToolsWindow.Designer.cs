@@ -123,7 +123,8 @@ namespace mRemoteNG.UI.Window
             this.ToolsListObjView.ShowCommandMenuOnRightClick = true;
             this.ToolsListObjView.ShowGroups = false;
             this.ToolsListObjView.Size = new System.Drawing.Size(827, 186);
-            this.ToolsListObjView.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            //CBH 按原始顺序排列
+            this.ToolsListObjView.Sorting = System.Windows.Forms.SortOrder.None;
             this.ToolsListObjView.TabIndex = 0;
             this.ToolsListObjView.UseCompatibleStateImageBehavior = false;
             this.ToolsListObjView.UseNotifyPropertyChanged = true;
@@ -175,6 +176,7 @@ namespace mRemoteNG.UI.Window
             this.WaitForExitColumnHeader.Groupable = false;
             this.WaitForExitColumnHeader.Text = "Wait for exit";
             this.WaitForExitColumnHeader.Width = 75;
+            this.WaitForExitColumnHeader.TextAlign = global::System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TryToIntegrateColumnHeader
             // 
@@ -183,6 +185,7 @@ namespace mRemoteNG.UI.Window
             this.TryToIntegrateColumnHeader.Groupable = false;
             this.TryToIntegrateColumnHeader.Text = "Try To Integrate";
             this.TryToIntegrateColumnHeader.Width = 95;
+            this.TryToIntegrateColumnHeader.TextAlign = global::System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // RunElevateHeader
             // 
@@ -191,6 +194,7 @@ namespace mRemoteNG.UI.Window
             this.RunElevateHeader.Groupable = false;
             this.RunElevateHeader.Text = "Run Elevated";
             this.RunElevateHeader.Width = 95;
+            this.RunElevateHeader.TextAlign = global::System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ShowOnToolbarColumnHeader
             // 
@@ -199,6 +203,7 @@ namespace mRemoteNG.UI.Window
             this.ShowOnToolbarColumnHeader.Groupable = false;
             this.ShowOnToolbarColumnHeader.Text = "Show On Toolbar";
             this.ShowOnToolbarColumnHeader.Width = 120;
+            this.ShowOnToolbarColumnHeader.TextAlign = global::System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ToolsContextMenuStrip
             // 
@@ -301,6 +306,11 @@ namespace mRemoteNG.UI.Window
             this.BrowseWorkingDir.Location = new System.Drawing.Point(723, 103);
             this.BrowseWorkingDir.Name = "BrowseWorkingDir";
             this.BrowseWorkingDir.Size = new System.Drawing.Size(95, 23);
+            //CBH 调整
+            this.BrowseWorkingDir.MinimumSize = new global::System.Drawing.Size(94, 20);
+            this.BrowseWorkingDir.MaximumSize = new global::System.Drawing.Size(96, 30);
+            this.BrowseWorkingDir.AutoSize = true;
+
             this.BrowseWorkingDir.TabIndex = 6;
             this.BrowseWorkingDir.Text = "Browse...";
             this.BrowseWorkingDir.UseVisualStyleBackColor = true;
@@ -318,8 +328,8 @@ namespace mRemoteNG.UI.Window
             // 
             // WorkingDirTextBox
             // 
-            this.WorkingDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.WorkingDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.WorkingDirTextBox.BorderStyle = global::System.Windows.Forms.BorderStyle.FixedSingle;
             this.WorkingDirTextBox.Location = new System.Drawing.Point(126, 104);
             this.WorkingDirTextBox.Name = "WorkingDirTextBox";
             this.WorkingDirTextBox.Size = new System.Drawing.Size(591, 22);
@@ -368,6 +378,11 @@ namespace mRemoteNG.UI.Window
             this.BrowseButton.Location = new System.Drawing.Point(723, 46);
             this.BrowseButton.Name = "BrowseButton";
             this.BrowseButton.Size = new System.Drawing.Size(95, 23);
+            //CBH
+            this.BrowseButton.MinimumSize = new global::System.Drawing.Size(94, 20);
+            this.BrowseButton.MaximumSize = new global::System.Drawing.Size(96, 30);
+            this.BrowseButton.AutoSize = true;
+
             this.BrowseButton.TabIndex = 3;
             this.BrowseButton.Text = "Browse...";
             this.BrowseButton.UseVisualStyleBackColor = true;
@@ -513,7 +528,10 @@ namespace mRemoteNG.UI.Window
             // 
             this.ClientSize = new System.Drawing.Size(827, 401);
             this.Controls.Add(this.ToolStripContainer);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //CBH
+            this.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ExternalToolsWindowFont);
+
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExternalToolsWindow";
             this.TabText = "External Applications";

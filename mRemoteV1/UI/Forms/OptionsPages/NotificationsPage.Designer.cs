@@ -124,7 +124,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxNotifications.Controls.Add(this.chkShowDebugInMC);
             this.groupBoxNotifications.Location = new System.Drawing.Point(6, 2);
             this.groupBoxNotifications.Name = "groupBoxNotifications";
-            this.groupBoxNotifications.Size = new System.Drawing.Size(601, 141);
+            this.groupBoxNotifications.Size = new System.Drawing.Size(530, 141);
             this.groupBoxNotifications.TabIndex = 0;
             this.groupBoxNotifications.TabStop = false;
             this.groupBoxNotifications.Text = "Notifications Panel";
@@ -194,7 +194,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxLogging.Controls.Add(this.textBoxLogPath);
             this.groupBoxLogging.Location = new System.Drawing.Point(6, 149);
             this.groupBoxLogging.Name = "groupBoxLogging";
-            this.groupBoxLogging.Size = new System.Drawing.Size(601, 158);
+            this.groupBoxLogging.Size = new System.Drawing.Size(530, 158);
             this.groupBoxLogging.TabIndex = 1;
             this.groupBoxLogging.TabStop = false;
             this.groupBoxLogging.Text = "Logging";
@@ -215,7 +215,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tblLogging.RowCount = 1;
             this.tblLogging.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblLogging.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tblLogging.Size = new System.Drawing.Size(585, 25);
+            this.tblLogging.Size = new System.Drawing.Size(503, 25);
             this.tblLogging.TabIndex = 7;
             // 
             // chkLogDebugMsgs
@@ -277,7 +277,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // buttonRestoreDefaultLogPath
             // 
             this.buttonRestoreDefaultLogPath._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(495, 83);
+            this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(231, 83);
             this.buttonRestoreDefaultLogPath.Name = "buttonRestoreDefaultLogPath";
             this.buttonRestoreDefaultLogPath.Size = new System.Drawing.Size(99, 23);
             this.buttonRestoreDefaultLogPath.TabIndex = 5;
@@ -288,7 +288,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // buttonOpenLogFile
             // 
             this.buttonOpenLogFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonOpenLogFile.Location = new System.Drawing.Point(273, 82);
+            this.buttonOpenLogFile.Location = new System.Drawing.Point(9, 82);
             this.buttonOpenLogFile.Name = "buttonOpenLogFile";
             this.buttonOpenLogFile.Size = new System.Drawing.Size(105, 23);
             this.buttonOpenLogFile.TabIndex = 3;
@@ -299,7 +299,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // buttonSelectLogPath
             // 
             this.buttonSelectLogPath._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonSelectLogPath.Location = new System.Drawing.Point(384, 82);
+            this.buttonSelectLogPath.Location = new System.Drawing.Point(120, 82);
             this.buttonSelectLogPath.Name = "buttonSelectLogPath";
             this.buttonSelectLogPath.Size = new System.Drawing.Size(105, 23);
             this.buttonSelectLogPath.TabIndex = 4;
@@ -331,7 +331,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.textBoxLogPath.Location = new System.Drawing.Point(9, 57);
             this.textBoxLogPath.Name = "textBoxLogPath";
             this.textBoxLogPath.ReadOnly = true;
-            this.textBoxLogPath.Size = new System.Drawing.Size(585, 20);
+            this.textBoxLogPath.Size = new System.Drawing.Size(506, 20);
             this.textBoxLogPath.TabIndex = 2;
             // 
             // groupBoxPopups
@@ -340,7 +340,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxPopups.Controls.Add(this.labelPopupShowTypes);
             this.groupBoxPopups.Location = new System.Drawing.Point(6, 313);
             this.groupBoxPopups.Name = "groupBoxPopups";
-            this.groupBoxPopups.Size = new System.Drawing.Size(601, 74);
+            this.groupBoxPopups.Size = new System.Drawing.Size(530, 74);
             this.groupBoxPopups.TabIndex = 2;
             this.groupBoxPopups.TabStop = false;
             this.groupBoxPopups.Text = "Pop-ups";
@@ -361,7 +361,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tblPopups.RowCount = 1;
             this.tblPopups.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblPopups.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tblPopups.Size = new System.Drawing.Size(585, 25);
+            this.tblPopups.Size = new System.Drawing.Size(503, 25);
             this.tblPopups.TabIndex = 1;
             // 
             // chkPopupDebug

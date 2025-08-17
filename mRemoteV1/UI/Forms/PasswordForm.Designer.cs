@@ -137,7 +137,7 @@ namespace mRemoteNG.UI.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(378, 154);
+            this.ClientSize = new System.Drawing.Size(408, 204);
             this.ControlBox = false;
             this.Controls.Add(this.pbLock);
             this.Controls.Add(this.txtVerify);

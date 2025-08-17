@@ -1,6 +1,7 @@
 ﻿using BrightIdeasSoftware;
 using mRemoteNG.Themes;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.Base
 {
@@ -8,19 +9,19 @@ namespace mRemoteNG.UI.Controls.Base
     //This is subclassed to avoid repeating the code in multiple places
     internal class NGListView : ObjectListView
     {
-
         private CellBorderDecoration deco;
         //Control if the gridlines are styled, must be set before the OnCreateControl is fired
+        //控制网格线是否设置样式，必须在触发 OnCreateControl 之前设置
         public bool DecorateLines { get; set; } = true;
+
+        //CBH 预留，可能用到
+        private ToolStripDropDown headerContextMenu;
 
 
         public NGListView()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
-
-
-
 
         protected override void OnCreateControl()
         {
@@ -66,5 +67,22 @@ namespace mRemoteNG.UI.Controls.Base
                 e.SubItem.Decoration = deco;
             }
         }
+
+        //CBH
+        protected override ToolStripDropDown MakeHeaderRightClickMenu(int columnIndex)
+        {
+            this.headerContextMenu = base.MakeHeaderRightClickMenu(columnIndex);
+            return this.headerContextMenu;
+        }
+
+        public ToolStripDropDown HeaderContextMenu
+        {
+            get
+            {
+                return this.headerContextMenu;
+            }
+        }
+
+
     }
 }

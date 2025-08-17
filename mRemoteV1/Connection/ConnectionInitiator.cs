@@ -3,11 +3,13 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
@@ -27,6 +29,7 @@ namespace mRemoteNG.Connection
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
             OpenConnection(containerInfo, force, null);
+
         }
 
         public void OpenConnection(ConnectionInfo connectionInfo)
@@ -67,7 +70,7 @@ namespace mRemoteNG.Connection
         }
 
         #region Private
-        private void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
+        private async void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
         {
             var children = containerInfo.Children;
             if (children.Count == 0) return;
@@ -75,13 +78,20 @@ namespace mRemoteNG.Connection
             {
                 var childAsContainer = child as ContainerInfo;
                 if (childAsContainer != null)
+                {
                     OpenConnection(childAsContainer, force, conForm);
+                }
                 else
+                {
                     OpenConnection(child, force, conForm);
+                    await Task.Delay(500);  //CBH 批量打开容器内连接，每次延时500ms
+                }
             }
-        }
+            //List<ConnectionInfo>.Enumerator enumerator = default(List<ConnectionInfo>.Enumerator);
 
-        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
+        }
+        //原有方法（去掉_ORI）
+        private void OpenConnection_ORI(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
         {
             try
             {
@@ -104,6 +114,102 @@ namespace mRemoteNG.Connection
 
                 var connectionPanel = SetConnectionPanel(connectionInfo, force);
                 if (string.IsNullOrEmpty(connectionPanel)) return;
+                var connectionForm = SetConnectionForm(conForm, connectionPanel);
+                var connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
+                SetConnectionFormEventHandlers(newProtocol, connectionForm);
+                SetConnectionEventHandlers(newProtocol);
+                BuildConnectionInterfaceController(connectionInfo, newProtocol, connectionContainer);
+
+                newProtocol.Force = force;
+
+                if (newProtocol.Initialize() == false)
+                {
+                    newProtocol.Close();
+                    return;
+                }
+
+                if (newProtocol.Connect() == false)
+                {
+                    newProtocol.Close();
+                    return;
+                }
+
+                connectionInfo.OpenConnections.Add(newProtocol);
+                _activeConnections.Add(connectionInfo.ConstantID);
+                FrmMain.Default.SelectedConnection = connectionInfo;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
+            }
+        }
+
+        //CBH 替换 OpenConnection 的方法 （_CBH）
+        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
+        {
+            this.OpenConnection_CBH(connectionInfo, force, conForm, false);
+        }
+
+
+        //CBH 修改，增加入参：是否来自容器
+        private void OpenConnection_CBH(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm, bool fromContainer)
+        {
+            try
+            {
+                if (connectionInfo.Hostname == "" && connectionInfo.Protocol != ProtocolType.IntApp)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strConnectionOpenFailedNoHostname);
+                    return;
+                }
+
+                StartPreConnectionExternalApp(connectionInfo);
+
+                //start---------------------------  CBH 相比原版方法增加的特殊处理逻辑！！！--------------------
+                //如果连接是使用外部工具的 ，并且配置的外部工具不为空
+                if (connectionInfo.Protocol == ProtocolType.IntApp && connectionInfo.ExtApp != "")
+                {
+                    ExternalTool extAppByName = Runtime.ExternalToolsService.GetExtAppByName(connectionInfo.ExtApp);
+                    //不尝试集成则直接启动外部工具
+                    if (extAppByName != null && !extAppByName.TryIntegrate)
+                    {
+                        extAppByName.Start(connectionInfo);
+                        return;
+                    }
+                    //不是来自容器的批量启动，并且使用的是 Radmin 外部工具，进行特殊优化
+                    //CBH：后续应该还需要优化代码
+                    if (extAppByName != null && !fromContainer && extAppByName.DisplayName.StartsWith("Radmin", StringComparison.OrdinalIgnoreCase))
+                    {
+                        //为 Radmin 特殊优化：尝试集成：强制关闭 TryIntegrate = false
+                        new ExternalTool("", "", "", "", false)
+                        {
+                            DisplayName = extAppByName.DisplayName,
+                            FileName = extAppByName.FileName,
+                            Arguments = extAppByName.Arguments,
+                            WorkingDir = extAppByName.WorkingDir,
+                            RunElevated = extAppByName.RunElevated,
+                            WaitForExit = extAppByName.WaitForExit,
+                            TryIntegrate = false,
+                            ShowOnToolbar = false
+                        }.Start(connectionInfo);
+                        return;
+                    }
+                }
+                //end---------------------------  CBH 增加的特殊处理逻辑！！！--------------------
+
+
+
+                if ((force & ConnectionInfo.Force.DoNotJump) != ConnectionInfo.Force.DoNotJump)
+                {
+                    if (SwitchToOpenConnection(connectionInfo))
+                        return;
+                }
+
+                var protocolFactory = new ProtocolFactory();
+                var newProtocol = protocolFactory.CreateProtocol(connectionInfo);
+                var connectionPanel = SetConnectionPanel(connectionInfo, force);
+                if (string.IsNullOrEmpty(connectionPanel)) 
+                    return;
+
                 var connectionForm = SetConnectionForm(conForm, connectionPanel);
                 var connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
                 SetConnectionFormEventHandlers(newProtocol, connectionForm);

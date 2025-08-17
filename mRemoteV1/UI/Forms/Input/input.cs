@@ -52,6 +52,7 @@ namespace mRemoteNG.UI.Forms.Input
             form.CancelButton = buttonCancel;
             form.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             form.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            //CBH 字体（2个构造参数）
             form.Font = new Font("Segoe UI", 8.25f);
             //form.Font = new Font("Segoe UI", 8.25f, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
 

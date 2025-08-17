@@ -52,6 +52,9 @@ namespace mRemoteNG.UI.Forms
             {
                 optionPage.ApplyLanguage();
             }
+            //CBH
+            btnCancel.Text = Language.strButtonCancel;
+            btnOK.Text = Language.strButtonOK;
         }
 
         private void CompileListOfOptionsPages()

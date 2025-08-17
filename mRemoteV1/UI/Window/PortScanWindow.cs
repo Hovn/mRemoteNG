@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -13,234 +14,202 @@ using WeifenLuo.WinFormsUI.Docking;
 namespace mRemoteNG.UI.Window
 {
     public partial class PortScanWindow
-	{
+    {
         #region Constructors
-		public PortScanWindow()
-		{
-			InitializeComponent();
-					
-			WindowType = WindowType.PortScan;
-			DockPnl = new DockContent();
+        public PortScanWindow()
+        {
+            InitializeComponent();
+                    
+            WindowType = WindowType.PortScan;
+            DockPnl = new DockContent();
             ApplyTheme();
-		}
+        }
         #endregion
 
-	    private new void ApplyTheme()
+        private new void ApplyTheme()
         {
             base.ApplyTheme(); 
         }
 
         #region Private Properties
         private bool IpsValid
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(ipStart.Octet1.Text))
-				{
-					return false;
-				}
-				if (string.IsNullOrEmpty(ipStart.Octet2.Text))
-				{
-					return false;
-				}
-				if (string.IsNullOrEmpty(ipStart.Octet3.Text))
-				{
-					return false;
-				}
-				if (string.IsNullOrEmpty(ipStart.Octet4.Text))
-				{
-					return false;
-				}
-						
-				if (string.IsNullOrEmpty(ipEnd.Octet1.Text))
-				{
-					return false;
-				}
-				if (string.IsNullOrEmpty(ipEnd.Octet2.Text))
-				{
-					return false;
-				}
-				if (string.IsNullOrEmpty(ipEnd.Octet3.Text))
-				{
-					return false;
-				}
-				if (string.IsNullOrEmpty(ipEnd.Octet4.Text))
-				{
-					return false;
-				}
-						
-				return true;
-			}
-		}
+        {
+            get
+            {
+                //CBH 改用正则表达式来校验
+                string pattern = "^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$";
+                return Regex.IsMatch(this.ipStart.Text, pattern) && Regex.IsMatch(this.ipEnd.Text, pattern);
+            }
+        }
         #endregion
-				
+                
         #region Private Fields
-		private PortScanner _portScanner;
-		private bool _scanning;
+        private PortScanner _portScanner;
+        private bool _scanning;
         #endregion
-				
+                
         #region Private Methods
         #region Event Handlers
 
-	    private void PortScan_Load(object sender, EventArgs e)
-	    {
-	        ApplyLanguage();
+        private void PortScan_Load(object sender, EventArgs e)
+        {
+            ApplyLanguage();
 
-	        try
-	        {
+            try
+            {
                 olvHosts.Columns.AddRange(new[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
-	            ShowImportControls(true);
-	            cbProtocol.SelectedIndex = 0;
-		        numericSelectorTimeout.Value = 5;
-	        }
-	        catch (Exception ex)
-	        {
-	            Runtime.MessageCollector.AddExceptionMessage(Language.strPortScanCouldNotLoadPanel, ex);
-	        }
-	    }
+                ShowImportControls(true);
+                cbProtocol.SelectedIndex = 0;
+                numericSelectorTimeout.Value = 5;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(Language.strPortScanCouldNotLoadPanel, ex);
+            }
+        }
 
-	    private void portStart_Enter(object sender, EventArgs e)
-		{
-			portStart.Select(0, portStart.Text.Length);
-		}
+        private void portStart_Enter(object sender, EventArgs e)
+        {
+            portStart.Select(0, portStart.Text.Length);
+        }
 
-	    private void portEnd_Enter(object sender, EventArgs e)
-		{
-			portEnd.Select(0, portEnd.Text.Length);
-		}
+        private void portEnd_Enter(object sender, EventArgs e)
+        {
+            portEnd.Select(0, portEnd.Text.Length);
+        }
 
-	    private void btnScan_Click(object sender, EventArgs e)
-		{
-			if (_scanning)
-			{
-				StopScan();
-			}
-			else
-			{
-				if (IpsValid)
-				{
-					StartScan();
-				}
-				else
-				{
-					Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strCannotStartPortScan);
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            if (_scanning)
+            {
+                StopScan();
+            }
+            else
+            {
+                if (IpsValid)
+                {
+                    StartScan();
                 }
-			}
-		}
+                else
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strCannotStartPortScan);
+                }
+            }
+        }
 
-	    private void btnImport_Click(object sender, EventArgs e)
-		{
+        private void btnImport_Click(object sender, EventArgs e)
+        {
             ProtocolType protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
-		    importSelectedHosts(protocol);
-		}
+            importSelectedHosts(protocol);
+        }
         #endregion
-				
-		private void ApplyLanguage()
-		{
-			lblStartIP.Text = $"{Language.strStartIP}:";
-			lblEndIP.Text = $"{Language.strEndIP}:";
-			btnScan.Text = Language.strButtonScan;
-			btnImport.Text = Language.strButtonImport;
-			lblOnlyImport.Text = $"{Language.strProtocolToImport}:";
-			clmHost.Text = Language.strColumnHostnameIP;
-			clmOpenPorts.Text = Language.strOpenPorts;
-			clmClosedPorts.Text = Language.strClosedPorts;
-			Label2.Text = $"{Language.strEndPort}:";
-			Label1.Text = $"{Language.strStartPort}:";
-			lblTimeout.Text = $"{Language.strTimeoutInSeconds}";
-			TabText = Language.strMenuPortScan;
-			Text = Language.strMenuPortScan;
-		}
-				
-		private void ShowImportControls(bool controlsVisible)
-		{
-			pnlScan.Visible = controlsVisible;
-			pnlImport.Visible = controlsVisible;
-			if (controlsVisible)
-			{
-				olvHosts.Height = pnlImport.Top - olvHosts.Top;
-			}
-			else
-			{
-				olvHosts.Height = pnlImport.Bottom - olvHosts.Top;
-			}
-		}
-				
-		private void StartScan()
-		{
-			try
-			{
-				_scanning = true;
-				SwitchButtonText();
-				olvHosts.Items.Clear();
-						
-				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
-				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
-				
-				_portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value, ((int)numericSelectorTimeout.Value)*1000);
-						
-				_portScanner.BeginHostScan += PortScanner_BeginHostScan;
-				_portScanner.HostScanned += PortScanner_HostScanned;
-				_portScanner.ScanComplete += PortScanner_ScanComplete;
-						
-				_portScanner.StartScan();
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionMessage("StartScan failed (UI.Window.PortScan)", ex);
-			}
-		}
-				
-		private void StopScan()
-		{
-		    _portScanner?.StopScan();
-		    _scanning = false;
-			SwitchButtonText();
-		}
-				
-		private void SwitchButtonText()
-		{
-			btnScan.Text = _scanning ? Language.strButtonStop : Language.strButtonScan;
-					
-			prgBar.Maximum = 100;
-			prgBar.Value = 0;
-		}
-				
-		private static void PortScanner_BeginHostScan(string host)
-		{
-			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Scanning " + host, true);
-		}
-				
-		private delegate void PortScannerHostScannedDelegate(ScanHost host, int scannedCount, int totalCount);
-		private void PortScanner_HostScanned(ScanHost host, int scannedCount, int totalCount)
-		{
-			if (InvokeRequired)
-			{
-				Invoke(new PortScannerHostScannedDelegate(PortScanner_HostScanned), new object[] {host, scannedCount, totalCount});
-				return;
-			}
-					
-			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Host scanned " + host.HostIp, true);
+                
+        private void ApplyLanguage()
+        {
+            lblStartIP.Text = $"{Language.strStartIP}:";
+            lblEndIP.Text = $"{Language.strEndIP}:";
+            btnScan.Text = Language.strButtonScan;
+            btnImport.Text = Language.strButtonImport;
+            lblOnlyImport.Text = $"{Language.strProtocolToImport}:";
+            clmHost.Text = Language.strColumnHostnameIP;
+            clmOpenPorts.Text = Language.strOpenPorts;
+            clmClosedPorts.Text = Language.strClosedPorts;
+            Label2.Text = $"{Language.strEndPort}:";
+            Label1.Text = $"{Language.strStartPort}:";
+            lblTimeout.Text = $"{Language.strTimeoutInSeconds}";
+            TabText = Language.strMenuPortScan;
+            Text = Language.strMenuPortScan;
+        }
+                
+        private void ShowImportControls(bool controlsVisible)
+        {
+            pnlScan.Visible = controlsVisible;
+            pnlImport.Visible = controlsVisible;
+            if (controlsVisible)
+            {
+                olvHosts.Height = pnlImport.Top - olvHosts.Top;
+            }
+            else
+            {
+                olvHosts.Height = pnlImport.Bottom - olvHosts.Top;
+            }
+        }
+                
+        private void StartScan()
+        {
+            try
+            {
+                _scanning = true;
+                SwitchButtonText();
+                olvHosts.Items.Clear();
+                        
+                System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
+                System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
+                
+                _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value, ((int)numericSelectorTimeout.Value)*1000);
+                        
+                _portScanner.BeginHostScan += PortScanner_BeginHostScan;
+                _portScanner.HostScanned += PortScanner_HostScanned;
+                _portScanner.ScanComplete += PortScanner_ScanComplete;
+                        
+                _portScanner.StartScan();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("StartScan failed (UI.Window.PortScan)", ex);
+            }
+        }
+                
+        private void StopScan()
+        {
+            _portScanner?.StopScan();
+            _scanning = false;
+            SwitchButtonText();
+        }
+                
+        private void SwitchButtonText()
+        {
+            btnScan.Text = _scanning ? Language.strButtonStop : Language.strButtonScan;
+                    
+            prgBar.Maximum = 100;
+            prgBar.Value = 0;
+        }
+                
+        private static void PortScanner_BeginHostScan(string host)
+        {
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Scanning " + host, true);
+        }
+                
+        private delegate void PortScannerHostScannedDelegate(ScanHost host, int scannedCount, int totalCount);
+        private void PortScanner_HostScanned(ScanHost host, int scannedCount, int totalCount)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new PortScannerHostScannedDelegate(PortScanner_HostScanned), new object[] {host, scannedCount, totalCount});
+                return;
+            }
+                    
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Host scanned " + host.HostIp, true);
 
             olvHosts.AddObject(host);
             prgBar.Maximum = totalCount;
-			prgBar.Value = scannedCount;
-		}
-				
-		private delegate void PortScannerScanComplete(List<ScanHost> hosts);
-		private void PortScanner_ScanComplete(List<ScanHost> hosts)
-		{
-			if (InvokeRequired)
-			{
-				Invoke(new PortScannerScanComplete(PortScanner_ScanComplete), new object[] {hosts});
-				return;
-			}
-					
-			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strPortScanComplete);
-					
-			_scanning = false;
-			SwitchButtonText();
-		}
+            prgBar.Value = scannedCount;
+        }
+                
+        private delegate void PortScannerScanComplete(List<ScanHost> hosts);
+        private void PortScanner_ScanComplete(List<ScanHost> hosts)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new PortScannerScanComplete(PortScanner_ScanComplete), new object[] {hosts});
+                return;
+            }
+                    
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strPortScanComplete);
+                    
+            _scanning = false;
+            SwitchButtonText();
+        }
         #endregion
 
         private void importSelectedHosts(ProtocolType protocol)
@@ -265,10 +234,10 @@ namespace mRemoteNG.UI.Window
         /// Determines where the imported hosts will be placed
         /// in the connection tree.
         /// </summary>
-	    private ContainerInfo GetDestinationContainerForImportedHosts()
-	    {
-	        var selectedNode = Windows.TreeForm.SelectedNode
-	                           ?? Windows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+        private ContainerInfo GetDestinationContainerForImportedHosts()
+        {
+            var selectedNode = Windows.TreeForm.SelectedNode
+                               ?? Windows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 
             // if a putty node is selected, place imported connections in the root connection node
             if (selectedNode is RootPuttySessionsNodeInfo || selectedNode is PuttySessionInfo)
@@ -277,8 +246,8 @@ namespace mRemoteNG.UI.Window
             // if the selected node is a connection, use its parent container
             var selectedTreeNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
 
-	        return selectedTreeNodeAsContainer;
-	    }
+            return selectedTreeNodeAsContainer;
+        }
 
         private void importVNCToolStripMenuItem_Click(object sender, EventArgs e)
         {

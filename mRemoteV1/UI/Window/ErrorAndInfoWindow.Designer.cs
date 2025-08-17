@@ -51,7 +51,7 @@ namespace mRemoteNG.UI.Window
 			this.pnlErrorMsg.Controls.Add(this.pbError);
 			this.pnlErrorMsg.Location = new System.Drawing.Point(0, 1);
 			this.pnlErrorMsg.Name = "pnlErrorMsg";
-			this.pnlErrorMsg.Size = new System.Drawing.Size(198, 232);
+			this.pnlErrorMsg.Size = new System.Drawing.Size(200, 232);
 			this.pnlErrorMsg.TabIndex = 20;
 			//
 			//txtMsgText
@@ -60,7 +60,7 @@ namespace mRemoteNG.UI.Window
 				| System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right);
 			this.txtMsgText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.txtMsgText.Location = new System.Drawing.Point(40, 20);
+			this.txtMsgText.Location = new System.Drawing.Point(40, 30);
 			this.txtMsgText.Multiline = true;
 			this.txtMsgText.Name = "txtMsgText";
 			this.txtMsgText.ReadOnly = true;
@@ -72,10 +72,13 @@ namespace mRemoteNG.UI.Window
 			//
 			this.lblMsgDate.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right);
-			this.lblMsgDate.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
-			this.lblMsgDate.Location = new System.Drawing.Point(40, 5);
+			//this.lblMsgDate.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+            //CBH
+            this.lblMsgDate.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ErrorAndInfoWindowFont);
+
+            this.lblMsgDate.Location = new System.Drawing.Point(40, 5);
 			this.lblMsgDate.Name = "lblMsgDate";
-			this.lblMsgDate.Size = new System.Drawing.Size(155, 13);
+			this.lblMsgDate.Size = new System.Drawing.Size(155, 20);
 			this.lblMsgDate.TabIndex = 40;
 			//
 			//pbError
@@ -114,8 +117,11 @@ namespace mRemoteNG.UI.Window
 			//
 			//cMenMC
 			//
-			this.cMenMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
-			this.cMenMC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.cMenMCCopy, this.cMenMCDelete});
+			//this.cMenMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+            //CBH
+            this.cMenMC.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ErrorAndInfoWindowFont);
+
+            this.cMenMC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.cMenMCCopy, this.cMenMCDelete});
 			this.cMenMC.Name = "cMenMC";
 			this.cMenMC.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
 			this.cMenMC.Size = new System.Drawing.Size(153, 70);
@@ -147,8 +153,10 @@ namespace mRemoteNG.UI.Window
 			this.ClientSize = new System.Drawing.Size(617, 233);
 			this.Controls.Add(this.lvErrorCollector);
 			this.Controls.Add(this.pnlErrorMsg);
-			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
-			this.HideOnClose = true;
+			//this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+            //CBH
+			this.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ErrorAndInfoWindowFont);
+            this.HideOnClose = true;
 			this.Icon = Resources.Info_Icon;
 			this.Name = "ErrorsAndInfos";
 			this.TabText = Language.strMenuNotifications;

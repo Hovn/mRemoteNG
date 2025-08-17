@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.pnlTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTop.BackColor = System.Drawing.Color.Black;
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(52, 58, 64);
             this.pnlTop.Controls.Add(this.lblEdition);
             this.pnlTop.Controls.Add(this.pbLogo);
             this.pnlTop.ForeColor = System.Drawing.Color.White;
@@ -62,12 +62,12 @@ namespace mRemoteNG.UI.Window
             // lblEdition
             // 
             this.lblEdition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEdition.BackColor = System.Drawing.Color.Black;
+            this.lblEdition.BackColor = System.Drawing.Color.FromArgb(52, 58, 64);
             this.lblEdition.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEdition.ForeColor = System.Drawing.Color.White;
-            this.lblEdition.Location = new System.Drawing.Point(845, 112);
+            this.lblEdition.Location = new System.Drawing.Point(845, 100);
             this.lblEdition.Name = "lblEdition";
-            this.lblEdition.Size = new System.Drawing.Size(264, 24);
+            this.lblEdition.Size = new System.Drawing.Size(264, 36);
             this.lblEdition.TabIndex = 0;
             this.lblEdition.Text = "Edition";
             this.lblEdition.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -159,9 +159,9 @@ namespace mRemoteNG.UI.Window
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblTitle.Location = new System.Drawing.Point(8, 20);
+            this.lblTitle.Location = new System.Drawing.Point(8, 18);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(126, 31);
+            this.lblTitle.Size = new System.Drawing.Size(126, 28);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "mRemoteNG";
             this.lblTitle.UseCompatibleTextRendering = true;

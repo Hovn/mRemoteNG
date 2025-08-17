@@ -9,6 +9,7 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
+using Renci.SshNet.Messages;
 
 namespace mRemoteNG.UI.Window
 {
@@ -93,11 +94,11 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				pnlErrorMsg.Location = new Point(0, 0);
-				pnlErrorMsg.Size = new Size(200, Height);
-				pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top;
+                pnlErrorMsg.Size = new Size(0, 0);
+                pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top;
 				txtMsgText.Size = new Size(pnlErrorMsg.Width - pbError.Width - 8, pnlErrorMsg.Height - 20);
-				lvErrorCollector.Location = new Point(pnlErrorMsg.Width + 5, 0);
-				lvErrorCollector.Size = new Size(Width - pnlErrorMsg.Width - 5, Height);
+				lvErrorCollector.Location = new Point(pnlErrorMsg.Width , 0);
+				lvErrorCollector.Size = new Size(Width - pnlErrorMsg.Width , Height);
 				lvErrorCollector.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 						
 				_layout = ControlLayout.Horizontal;
@@ -222,9 +223,11 @@ namespace mRemoteNG.UI.Window
                         }
                         break;
 				}
-						
-				lblMsgDate.Text = eMsg.Date.ToString(CultureInfo.InvariantCulture);
-				txtMsgText.Text = eMsg.Text;
+
+                //lblMsgDate.Text = eMsg.Date.ToString(CultureInfo.InvariantCulture);
+                //CBH
+                lblMsgDate.Text = eMsg.Date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                txtMsgText.Text = eMsg.Text;
 			}
 			catch (Exception ex)
 			{
@@ -290,8 +293,10 @@ namespace mRemoteNG.UI.Window
 					}
 							
 					stringBuilder.AppendLine(message.Class.ToString());
-					stringBuilder.AppendLine(message.Date.ToString(CultureInfo.InvariantCulture));
-					stringBuilder.AppendLine(message.Text);
+					//stringBuilder.AppendLine(message.Date.ToString(CultureInfo.InvariantCulture));
+					//CBH
+                    stringBuilder.AppendLine(message.Date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
+                    stringBuilder.AppendLine(message.Text);
 					stringBuilder.AppendLine("----------");
 				}
 						
