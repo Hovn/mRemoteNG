@@ -42,7 +42,7 @@ namespace mRemoteNG.UI.Forms.Input
 
             form.Text = title;
             form.ClientSize = new Size(400, 110);
-            form.Controls.AddRange(new Control[] {label, textBox, buttonOk, buttonCancel});
+            form.Controls.AddRange(new Control[] {label, textBox, buttonCancel, buttonOk});
             form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.StartPosition = FormStartPosition.CenterScreen;
@@ -52,7 +52,7 @@ namespace mRemoteNG.UI.Forms.Input
             form.CancelButton = buttonCancel;
             form.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             form.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            form.Font = new Font("Segoe UI", 8.25f, FontStyle.Regular, GraphicsUnit.Point);
+            form.Font = new Font("Segoe UI", 8.25f);
             //form.Font = new Font("Segoe UI", 8.25f, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
 
             var dialogResult = form.ShowDialog();
