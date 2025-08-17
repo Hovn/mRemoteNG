@@ -30,18 +30,18 @@ namespace mRemoteNG.UI.Forms.Input
 
             buttonOk.Text = Language.strButtonOK;
             buttonOk.DialogResult = DialogResult.OK;
-            buttonOk.FlatStyle = FlatStyle.Flat;
+            buttonOk.FlatStyle = FlatStyle.System;
             buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonOk.SetBounds(309, 72, 75, 25);
 
             buttonCancel.Text = Language.strButtonCancel;
             buttonCancel.DialogResult = DialogResult.Cancel;
-            buttonCancel.FlatStyle = FlatStyle.Flat;
+            buttonCancel.FlatStyle = FlatStyle.System;
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.SetBounds(309, 72, 75, 23);
+            buttonCancel.SetBounds(228, 72, 75, 25);
 
             form.Text = title;
-            form.ClientSize = new Size(396, 107);
+            form.ClientSize = new Size(400, 110);
             form.Controls.AddRange(new Control[] {label, textBox, buttonOk, buttonCancel});
             form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -52,6 +52,8 @@ namespace mRemoteNG.UI.Forms.Input
             form.CancelButton = buttonCancel;
             form.BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             form.ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            form.Font = new Font("Segoe UI", 8.25f, FontStyle.Regular, GraphicsUnit.Point);
+            //form.Font = new Font("Segoe UI", 8.25f, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
 
             var dialogResult = form.ShowDialog();
             value = textBox.Text;
