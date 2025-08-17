@@ -2737,8 +2737,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Release Channel</value>
   </data>
   <data name="strReleaseChannelExplanation" xml:space="preserve">
-    <value>Stable channel includes final releases only.\r\nBeta channel includes Betas &amp;amp; Release Candidates.\r\nDevelopment Channel includes Alphas, Betas &amp;amp; Release Candidates.</value>
-    <!--<value>Stable channel includes final releases only.\r\nBeta channel includes Betas &amp; Release Candidates.\r\nDevelopment Channel includes Alphas, Betas &amp; Release Candidates.</value>-->
+    <value>Stable channel includes final Release only.&#xD;&#xA;Beta channel includes Beta and Release Candidates.&#xD;&#xA;Development Channel includes Alpha, Beta and Release Candidates.</value>
   </data>
   <data name="strDragDropSwitch" xml:space="preserve">
     <value>DragDropSwitch</value>

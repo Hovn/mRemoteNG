@@ -6364,7 +6364,9 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   查找类似 &lt;value&gt;Stable channel includes final releases only.\r\nBeta channel includes Betas &amp;amp; Release Candidates.\r\nDevelopment Channel includes Alphas, Betas &amp;amp; Release Candidates.&lt;/value&gt; 的本地化字符串。
+        ///   查找类似 Stable channel includes final Release only.
+        ///Beta channel includes Beta and Release Candidates.
+        ///Development Channel includes Alpha, Beta and Release Candidates. 的本地化字符串。
         /// </summary>
         internal static string strReleaseChannelExplanation {
             get {

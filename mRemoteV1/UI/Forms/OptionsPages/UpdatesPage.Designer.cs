@@ -1,34 +1,34 @@
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	
+    
     public sealed partial class UpdatesPage : OptionsPage
-	{
-			
-		//UserControl overrides dispose to clean up the component list.
-		[System.Diagnostics.DebuggerNonUserCode()]protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (disposing && components != null)
-				{
-					components.Dispose();
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-			
-		//Required by the Windows Form Designer
-		private System.ComponentModel.Container components = null;
-			
-		//NOTE: The following procedure is required by the Windows Form Designer
-		//It can be modified using the Windows Form Designer.
-		//Do not modify it using the code editor.
-		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
-		{
+    {
+            
+        //UserControl overrides dispose to clean up the component list.
+        [System.Diagnostics.DebuggerNonUserCode()]protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (disposing && components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+            
+        //Required by the Windows Form Designer
+        private System.ComponentModel.Container components = null;
+            
+        //NOTE: The following procedure is required by the Windows Form Designer
+        //It can be modified using the Windows Form Designer.
+        //Do not modify it using the code editor.
+        [System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdatesPage));
             this.lblUpdatesExplanation = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pnlUpdateCheck = new System.Windows.Forms.Panel();
@@ -123,9 +123,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(366, 44);
             this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "Stable channel includes final releases only.\r\nBeta channel includes Betas & Relea" +
-    "se Candidates.\r\nDevelopment Channel includes Alphas, Betas & Release Candidates." +
-    "";
+            this.textBox1.Text = "Stable channel includes final releases only.\r\n" +
+                "Beta channel includes Betas & Release Candidates.\r\n" +
+                "Development Channel includes Alphas, Betas & Release Candidates.";
             // 
             // lblReleaseChannel
             // 
@@ -337,26 +337,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlReleaseChannel.PerformLayout();
             this.ResumeLayout(false);
 
-		}
-		internal Controls.Base.NGLabel lblUpdatesExplanation;
-		internal System.Windows.Forms.Panel pnlUpdateCheck;
-		internal Controls.Base.NGButton btnUpdateCheckNow;
-		internal Controls.Base.NGCheckBox chkCheckForUpdatesOnStartup;
-		internal Controls.Base.NGComboBox cboUpdateCheckFrequency;
-		internal System.Windows.Forms.Panel pnlProxy;
-		internal System.Windows.Forms.Panel pnlProxyBasic;
-		internal Controls.Base.NGLabel lblProxyAddress;
-		internal Controls.Base.NGTextBox txtProxyAddress;
-		internal Controls.Base.NGLabel lblProxyPort;
-		internal Controls.Base.NGNumericUpDown numProxyPort;
-		internal Controls.Base.NGCheckBox chkUseProxyForAutomaticUpdates;
-		internal Controls.Base.NGCheckBox chkUseProxyAuthentication;
-		internal System.Windows.Forms.Panel pnlProxyAuthentication;
-		internal Controls.Base.NGLabel lblProxyUsername;
-		internal Controls.Base.NGTextBox txtProxyUsername;
-		internal Controls.Base.NGLabel lblProxyPassword;
-		internal Controls.Base.NGTextBox txtProxyPassword;
-		internal Controls.Base.NGButton btnTestProxy;
+        }
+        internal Controls.Base.NGLabel lblUpdatesExplanation;
+        internal System.Windows.Forms.Panel pnlUpdateCheck;
+        internal Controls.Base.NGButton btnUpdateCheckNow;
+        internal Controls.Base.NGCheckBox chkCheckForUpdatesOnStartup;
+        internal Controls.Base.NGComboBox cboUpdateCheckFrequency;
+        internal System.Windows.Forms.Panel pnlProxy;
+        internal System.Windows.Forms.Panel pnlProxyBasic;
+        internal Controls.Base.NGLabel lblProxyAddress;
+        internal Controls.Base.NGTextBox txtProxyAddress;
+        internal Controls.Base.NGLabel lblProxyPort;
+        internal Controls.Base.NGNumericUpDown numProxyPort;
+        internal Controls.Base.NGCheckBox chkUseProxyForAutomaticUpdates;
+        internal Controls.Base.NGCheckBox chkUseProxyAuthentication;
+        internal System.Windows.Forms.Panel pnlProxyAuthentication;
+        internal Controls.Base.NGLabel lblProxyUsername;
+        internal Controls.Base.NGTextBox txtProxyUsername;
+        internal Controls.Base.NGLabel lblProxyPassword;
+        internal Controls.Base.NGTextBox txtProxyPassword;
+        internal Controls.Base.NGButton btnTestProxy;
         private Controls.Base.NGLabel lblReleaseChannel;
         private Controls.Base.NGComboBox cboReleaseChannel;
         private Controls.Base.NGTextBox textBox1;

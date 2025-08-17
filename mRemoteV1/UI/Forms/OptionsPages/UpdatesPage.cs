@@ -36,7 +36,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-			lblUpdatesExplanation.Text = Language.strUpdateCheck;
+            lblUpdatesExplanation.Text = Language.strUpdateCheck;
 
             chkCheckForUpdatesOnStartup.Text = Language.strCheckForUpdatesOnStartup;
             btnUpdateCheckNow.Text = Language.strCheckNow;
