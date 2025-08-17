@@ -84,6 +84,10 @@ namespace mRemoteNG.UI.Forms
             foreach (var page in _pages.Select(keyValuePair => keyValuePair.Value))
             {
                 page.LoadSettings();
+                //CBH
+                //Debug.WriteLine("PageName: " + page.PageName+"|"+ page.PageName.GetType());
+                //Debug.WriteLine("PageIcon: " + page.PageIcon+"|"+ page.PageIcon.GetType());
+                //Debug.WriteLine("-----------");
                 _pageIconImageList.Images.Add(page.PageName, page.PageIcon);
                 lstOptionPages.AddObject(page);
             }

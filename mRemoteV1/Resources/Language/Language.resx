@@ -2703,4 +2703,46 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strUseAdmPwd" xml:space="preserve">
     <value>Use AdmPwd.E to retrieve the password</value>
   </data>
+  <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strPropertyNameRedirectMicrophones" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strRDPMicrophonesLeaveAtLocalComputer" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strRDPMicrophonesSendToRemoteComputer" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strUpdateCheckFailed" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strUpdateStartFailed" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strWriteLogFile" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strUpdateDeleteFailed" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strVisionAppRemoteDesktopCsv" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strReleaseChannel" xml:space="preserve">
+    <value>Release Channel</value>
+  </data>
+  <data name="strReleaseChannelExplanation" xml:space="preserve">
+    <value>Stable channel includes final releases only.\r\nBeta channel includes Betas &amp;amp; Release Candidates.\r\nDevelopment Channel includes Alphas, Betas &amp;amp; Release Candidates.</value>
+  </data>
+  <data name="strDragDropSwitch" xml:space="preserve">
+    <value>DragDropSwitch</value>
+  </data>
+  <data name="strClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
 </root>
