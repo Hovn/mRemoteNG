@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Forms
             this.btnNew.Text = global::mRemoteNG.Language.strButtonNew;
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 
-            //CBH 
+            //CBH Òþ²ØÎÄ×Ö
             this.btnNew.Text = null;
             //if (this.btnNew.Width > 75)
             //{

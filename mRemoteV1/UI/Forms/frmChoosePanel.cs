@@ -36,7 +36,9 @@ namespace mRemoteNG.UI.Forms
             //{
             //    this.btnNew.Text = Language.strButtonNew;
             //}
-            btnNew.Text = Language.strButtonNew;
+
+            //默认隐藏 新建 文字
+            //btnNew.Text = Language.strButtonNew;
             Text = Language.strTitleSelectPanel;
         }
 
