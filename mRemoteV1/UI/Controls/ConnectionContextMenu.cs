@@ -23,9 +23,11 @@ namespace mRemoteNG.UI.Controls
         private ToolStripSeparator _cMenTreeSep1;
         private ToolStripMenuItem _cMenTreeConnect;
         private ToolStripMenuItem _cMenTreeConnectWithOptions;
+        private ToolStripMenuItem _cMenTreeConnectWithOptionsDontConnectToConsoleSession;
         private ToolStripMenuItem _cMenTreeConnectWithOptionsConnectToConsoleSession;
-        private ToolStripMenuItem _cMenTreeConnectWithOptionsNoCredentials;
         private ToolStripMenuItem _cMenTreeConnectWithOptionsConnectInFullscreen;
+        private ToolStripMenuItem _cMenTreeConnectWithOptionsNoCredentials;
+        private ToolStripMenuItem _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting;
         private ToolStripMenuItem _cMenTreeDisconnect;
         private ToolStripSeparator _cMenTreeSep2;
         private ToolStripMenuItem _cMenTreeToolsTransferFile;
@@ -40,8 +42,6 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeMoveDown;
         private ToolStripMenuItem _cMenTreeToolsExternalApps;
         private ToolStripMenuItem _cMenTreeDuplicate;
-        private ToolStripMenuItem _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting;
-        private ToolStripMenuItem _cMenTreeConnectWithOptionsDontConnectToConsoleSession;
         private ToolStripMenuItem _cMenTreeImport;
         private ToolStripMenuItem _cMenTreeExportFile;
         private ToolStripSeparator _toolStripSeparator1;
@@ -62,7 +62,26 @@ namespace mRemoteNG.UI.Controls
             Opening += (sender, args) =>
             {
                 AddExternalApps();
-                if (_connectionTree.SelectedNode == null)
+
+                //CBH Debug -------------------
+                //Console.WriteLine($"--- Debug at {DateTime.Now} ---");
+                //Console.WriteLine(_connectionTree.SelectedNode!=null? $"单个选中节点：{_connectionTree.SelectedNode.Name}" : "单个选中节点：无");
+                //Console.WriteLine("多个选中节点："+_connectionTree.SelectedNodes.Count);
+                //if (_connectionTree.SelectedNodes.Count > 0)
+                //{
+                //    var str = "";
+                //    foreach (var obj in _connectionTree.SelectedNodes)
+                //    {
+                //        var node = (ConnectionInfo)obj;
+                //        str += (node.Name+" | ");
+                //    }
+                //    Console.WriteLine($"多个选中节点: {str}");
+                //}
+                //Console.WriteLine("--- End ------");
+
+                //不建议再以如下来判断是否弹右键菜单了，改用选中的数量
+                //if (_connectionTree.SelectedNode == null)
+                if (_connectionTree.SelectedNodes == null || _connectionTree.SelectedNodes.Count == 0)
                 {
                     args.Cancel = true;
                     return;
@@ -401,28 +420,42 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Text = Language.strMoveDown;
         }
 
+        //CBH 根据 选中节点 类型的不同，菜单项针对性进行启用或禁用
         internal void ShowHideMenuItems()
         {
             try
             {
                 Enabled = true;
                 EnableMenuItemsRecursive(Items);
+                //CBH 多选节点的场景时构建特殊的右键菜单
+                if (_connectionTree.SelectedNodes.Count > 1)
+                {
+                    //ShowHideMenuItemsForMultiConnectionNode(_connectionTree.SelectedNodes);
+                    ShowHideMenuItemsForMultiConnectionNode();
+                    return;
+                }
+
+                //PuTTY会话已保存 根节点
                 if (_connectionTree.SelectedNode is RootPuttySessionsNodeInfo)
                 {
                     ShowHideMenuItemsForRootPuttyNode();
                 }
+                //连接 根节点
                 else if (_connectionTree.SelectedNode is RootNodeInfo)
                 {
                     ShowHideMenuItemsForRootConnectionNode();
                 }
+                //容器节点
                 else if (_connectionTree.SelectedNode is ContainerInfo)
                 {
                     ShowHideMenuItemsForContainer(_connectionTree.SelectedNode);
                 }
+                //PuTTY会话 常规节点
                 else if (_connectionTree.SelectedNode is PuttySessionInfo)
                 {
                     ShowHideMenuItemsForPuttyNode(_connectionTree.SelectedNode);
                 }
+                //默认节点（服务器 常规节点）
                 else
                 {
                     ShowHideMenuItemsForConnectionNode(_connectionTree.SelectedNode);
@@ -434,91 +467,147 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        internal void ShowHideMenuItemsForRootPuttyNode()
+        //CBH 多选节点的场景时构建特殊的右键菜单
+        internal void ShowHideMenuItemsForMultiConnectionNode()
         {
-            _cMenTreeAddConnection.Enabled = false;
-            _cMenTreeAddFolder.Enabled = false;
-            _cMenTreeConnect.Enabled = false;
-            _cMenTreeConnectWithOptions.Enabled = false;
-            _cMenTreeDisconnect.Enabled = false;
+            _cMenTreeConnect.Enabled = true;  //连接
+            _cMenTreeConnectWithOptions.Enabled = false;  //连接（选项）
+            _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;//子菜单
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;//子菜单
+            _cMenTreeConnectWithOptionsNoCredentials.Enabled = false;//子菜单
+            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;//子菜单
+            _cMenTreeDisconnect.Enabled = true;  //断开连接
+
+            _cMenTreeToolsExternalApps.Enabled = true;  //外部工具
             _cMenTreeToolsTransferFile.Enabled = false;
-            _cMenTreeConnectWithOptions.Enabled = false;
-            _cMenTreeToolsSort.Enabled = false;
-            _cMenTreeToolsExternalApps.Enabled = false;
+
             _cMenTreeDuplicate.Enabled = false;
+            _cMenTreeRename.Enabled = false;
+            _cMenTreeDelete.Enabled = true;  //删除
+
             _cMenTreeImport.Enabled = false;
             _cMenTreeExportFile.Enabled = false;
-            _cMenTreeRename.Enabled = false;
-            _cMenTreeDelete.Enabled = false;
+
+            _cMenTreeAddConnection.Enabled = false;
+            _cMenTreeAddFolder.Enabled = false;
+
+            _cMenTreeToolsSort.Enabled = false;
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
         }
 
+        //PuTTY会话已保存 根节点
+        internal void ShowHideMenuItemsForRootPuttyNode()
+        {
+            _cMenTreeConnect.Enabled = false;
+            _cMenTreeConnectWithOptions.Enabled = false;
+            _cMenTreeDisconnect.Enabled = false;
+
+            _cMenTreeToolsExternalApps.Enabled = false;
+            _cMenTreeToolsTransferFile.Enabled = false;
+
+            _cMenTreeDuplicate.Enabled = false;
+            _cMenTreeRename.Enabled = false;
+            _cMenTreeDelete.Enabled = false;
+
+            _cMenTreeImport.Enabled = false;
+            _cMenTreeExportFile.Enabled = false;
+
+            _cMenTreeAddConnection.Enabled = false;
+            _cMenTreeAddFolder.Enabled = false;
+
+            _cMenTreeToolsSort.Enabled = false;
+            _cMenTreeMoveUp.Enabled = false;
+            _cMenTreeMoveDown.Enabled = false;
+        }
+
+        //连接 根节点  //的表示 true 启用
         internal void ShowHideMenuItemsForRootConnectionNode()
         {
             _cMenTreeConnect.Enabled = false;
             _cMenTreeConnectWithOptions.Enabled = false;
-            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-            _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;
+            _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;//子菜单
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;//子菜单
+            //
+            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;//子菜单
             _cMenTreeDisconnect.Enabled = false;
-            _cMenTreeToolsTransferFile.Enabled = false;
+            
             _cMenTreeToolsExternalApps.Enabled = false;
+            _cMenTreeToolsTransferFile.Enabled = false;
+            
             _cMenTreeDuplicate.Enabled = false;
+            //_cMenTreeRename.Enabled = false;
             _cMenTreeDelete.Enabled = false;
+            
+            //_cMenTreeImport.Enabled = false;
+            //_cMenTreeExportFile.Enabled = false;
+            
+            //_cMenTreeAddConnection.Enabled = false;
+            //_cMenTreeAddFolder.Enabled = false;
+
+            //_cMenTreeToolsSort.Enabled = false;
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
-        }
+         }
 
+        //容器节点
         internal void ShowHideMenuItemsForContainer(ConnectionInfo connectionInfo)
         {
-            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+            //连接选项子菜单
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-            _cMenTreeDisconnect.Enabled = false;
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
 
+            //如果有打开的连接。则启用‘断开连接’
             var openConnections = ((ContainerInfo)connectionInfo).Children.Sum(child => child.OpenConnections.Count);
-            if (openConnections > 0)
-                _cMenTreeDisconnect.Enabled = true;
+            _cMenTreeDisconnect.Enabled = (openConnections > 0);
 
+            //CBH 容器也可以使用外部工具
+            _cMenTreeToolsExternalApps.Enabled = true;
             _cMenTreeToolsTransferFile.Enabled = false;
-            _cMenTreeToolsExternalApps.Enabled = true;  //CBH 容器也可以使用外部工具
         }
 
+        //PuTTY会话 常规节点
         internal void ShowHideMenuItemsForPuttyNode(ConnectionInfo connectionInfo)
         {
+            //连接选项子菜单
+            _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+            
             _cMenTreeAddConnection.Enabled = false;
             _cMenTreeAddFolder.Enabled = false;
 
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+            if (!(connectionInfo.Protocol == ProtocolType.SSH1 || connectionInfo.Protocol == ProtocolType.SSH2))
                 _cMenTreeToolsTransferFile.Enabled = false;
 
-            _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-            _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-            _cMenTreeToolsSort.Enabled = false;
             _cMenTreeDuplicate.Enabled = false;
             _cMenTreeRename.Enabled = false;
             _cMenTreeDelete.Enabled = false;
-            _cMenTreeMoveUp.Enabled = false;
-            _cMenTreeMoveDown.Enabled = false;
+
             _cMenTreeImport.Enabled = false;
             _cMenTreeExportFile.Enabled = false;
+
+            _cMenTreeToolsSort.Enabled = false;
+            _cMenTreeMoveUp.Enabled = false;
+            _cMenTreeMoveDown.Enabled = false;
         }
 
+        //默认节点（服务器 常规节点）
         internal void ShowHideMenuItemsForConnectionNode(ConnectionInfo connectionInfo)
         {
+            //如果没有打开的连接。则禁用‘断开连接’
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+            if (!(connectionInfo.Protocol == ProtocolType.SSH1 || connectionInfo.Protocol == ProtocolType.SSH2))
                 _cMenTreeToolsTransferFile.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.ICA))
+            if (!(connectionInfo.Protocol == ProtocolType.RDP || connectionInfo.Protocol == ProtocolType.ICA))
             {
-                _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
                 _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
             }
 
             if (connectionInfo.Protocol == ProtocolType.IntApp)
@@ -545,6 +634,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.ShortcutKeys = Keys.Control | Keys.Down;
         }
 
+        //启用所有菜单项及子菜单项
         private static void EnableMenuItemsRecursive(ToolStripItemCollection items, bool enable = true)
         {
             foreach (ToolStripItem item in items)
@@ -568,13 +658,13 @@ namespace mRemoteNG.UI.Controls
             {
                 ResetExternalAppMenu();
 
-                foreach (ExternalTool extA in Runtime.ExternalToolsService.ExternalTools)
+                foreach (ExternalTool extTool in Runtime.ExternalToolsService.ExternalTools)
                 {
                     var menuItem = new ToolStripMenuItem
                     {
-                        Text = extA.DisplayName,
-                        Tag = extA,
-                        Image = extA.Image
+                        Text = extTool.DisplayName,
+                        Tag = extTool,
+                        Image = extTool.Image
                     };
                     //CBH 字体：连接项右键外部工具菜单可使用自定义字体
                     menuItem.Font = Settings.GetCustomFont(Settings.Default.ConnectionTreeWindowExtAppsMenuFont);
@@ -597,14 +687,30 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsExternalApps.DropDownItems.Clear();
         }
 
+        //菜单点击处理逻辑
         #region Click handlers
         private void OnConnectClicked(object sender, EventArgs e)
         {
-            var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
-            if (selectedNodeAsContainer != null)
-                _connectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DoNotJump);
-            else
-                _connectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.DoNotJump);
+            if (_connectionTree.SelectedNodes.Count > 0) //单选/多选节点时
+            {
+                foreach (ConnectionInfo node in _connectionTree.SelectedNodes)
+                {
+                    var asContainer = node as ContainerInfo;
+                    if (asContainer != null)
+                        //连接容器下的所有服务器
+                        _connectionInitiator.OpenConnection(asContainer, ConnectionInfo.Force.DoNotJump);
+                    else
+                        _connectionInitiator.OpenConnection(node, ConnectionInfo.Force.DoNotJump);
+                }
+            }
+
+
+            //ORI
+            //var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
+            //if (selectedNodeAsContainer != null)
+            //    _connectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DoNotJump);
+            //else
+            //    _connectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnConnectToConsoleSessionClicked(object sender, EventArgs e)
@@ -654,7 +760,15 @@ namespace mRemoteNG.UI.Controls
 
         private void OnDisconnectClicked(object sender, EventArgs e)
         {
-            DisconnectConnection(_connectionTree.SelectedNode);
+            if (_connectionTree.SelectedNodes.Count > 0) //单选/多选节点时
+            {
+                foreach (ConnectionInfo node in _connectionTree.SelectedNodes)
+                {
+                    DisconnectConnection(node);
+                }
+            }
+
+            //DisconnectConnection(_connectionTree.SelectedNode);
         }
 
         public void DisconnectConnection(ConnectionInfo connectionInfo)
@@ -734,7 +848,8 @@ namespace mRemoteNG.UI.Controls
 
         private void OnDeleteClicked(object sender, EventArgs e)
         {
-            _connectionTree.DeleteSelectedNode();
+            _connectionTree.DeleteSelectedNodes();
+            //_connectionTree.DeleteSelectedNode();
         }
 
         private void OnImportFileClicked(object sender, EventArgs e)
@@ -796,11 +911,13 @@ namespace mRemoteNG.UI.Controls
         {
             //ORI
             //StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+
             //CBH 入参增加选中的节点
-            StartExternalApp_CBH((ExternalTool)((ToolStripMenuItem)sender).Tag, _connectionTree.SelectedNode);
+            StartExternalApp_CBH((ExternalTool)((ToolStripMenuItem)sender).Tag);
+            //StartExternalApp_CBH((ExternalTool)((ToolStripMenuItem)sender).Tag, _connectionTree.SelectedNode);
         }
 
-        //原始方法
+        //原始方法：只允许在常规 服务器及PuTTY节点上使用（不允许在容器类型上执行）
         private void StartExternalApp(ExternalTool externalTool)
         {
             try
@@ -814,7 +931,29 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        //CBH 修改：如果是在容器上执行外部工具，则循环子节点逐一执行外部工具。
+        //CBH  支持在多选节点上启动外部工具
+        private async void StartExternalApp_CBH(ExternalTool externalTool)
+        {
+            try
+            {
+                if (_connectionTree.SelectedNodes.Count > 0) //单选/多选节点时
+                {
+                    foreach (ConnectionInfo node in _connectionTree.SelectedNodes)
+                    {
+                        StartExternalApp_CBH(externalTool, node);
+                        await Task.Delay(1500); //每启动一个等待一会
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)", ex);
+            }
+        }
+
+        //CBH
+        //如果是在容器上执行外部工具，则循环子节点逐一执行外部工具。
         //保留 2 s 延迟逻辑；若将来需要并发启动，可再把 Delay 换成 SemaphoreSlim 等。
         //方法签名仍然保持 async void，因为看起来是事件处理器；如果是普通业务方法，建议改为 async Task。
         private async void StartExternalApp_CBH(ExternalTool externalTool, ConnectionInfo node)
@@ -831,7 +970,7 @@ namespace mRemoteNG.UI.Controls
                     foreach (ConnectionInfo child in container.Children)
                     {
                         StartExternalApp_CBH(externalTool, child);   // 递归
-                        await Task.Delay(2000);                      // 每启动一个等待 2 s （后续计划使用配置文件配置）
+                        await Task.Delay(1500);                      // 每启动一个等待一会 （后续计划使用配置文件配置）
                     }
                     //return;
                 }
@@ -847,6 +986,8 @@ namespace mRemoteNG.UI.Controls
                 Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)", ex);
             }
         }
+
+        
         #endregion
     }
 }

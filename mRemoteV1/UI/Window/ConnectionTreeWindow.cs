@@ -21,7 +21,10 @@ namespace mRemoteNG.UI.Window
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private ThemeManager _themeManager;
 
+        //CBH 给外界暴露一个只读属性 SelectedNode（选中的节点），当有人读取它时，直接把 olvConnections.SelectedNode 的结果返回
         public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
+        //CBH 增加多选模式选中的条目
+        public IReadOnlyList<ConnectionInfo> SelectedNodes => olvConnections.SelectedNodes;
 
         public ConnectionTree ConnectionTree
         {

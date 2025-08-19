@@ -24,7 +24,7 @@ using TabPage = Crownwood.Magic.Controls.TabPage;
 
 namespace mRemoteNG.UI.Window
 {
-	public partial class ConnectionWindow : BaseWindow
+    public partial class ConnectionWindow : BaseWindow
     {
         public TabControl TabController;
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
@@ -155,12 +155,12 @@ namespace mRemoteNG.UI.Window
         {
             if (TabController.SelectedTab == null)
             {
-	            FrmMain.Default.SelectedConnection = null;
+                FrmMain.Default.SelectedConnection = null;
             }
             else
             {
                 var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
-	            FrmMain.Default.SelectedConnection = interfaceControl?.Info;
+                FrmMain.Default.SelectedConnection = interfaceControl?.Info;
             }
         }
         #endregion
@@ -195,8 +195,8 @@ namespace mRemoteNG.UI.Window
             {
                 if (_documentHandlersAdded)
                 {
-	                FrmMain.Default.ResizeBegin -= Connection_ResizeBegin;
-	                FrmMain.Default.ResizeEnd -= Connection_ResizeEnd;
+                    FrmMain.Default.ResizeBegin -= Connection_ResizeBegin;
+                    FrmMain.Default.ResizeEnd -= Connection_ResizeEnd;
                     _documentHandlersAdded = false;
                 }
                 DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
@@ -211,8 +211,8 @@ namespace mRemoteNG.UI.Window
                     DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
                     _floatHandlersAdded = false;
                 }
-	            FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
-	            FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
+                FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
+                FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
                 _documentHandlersAdded = true;
             }
         }

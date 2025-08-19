@@ -6,6 +6,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -19,14 +20,32 @@ namespace mRemoteNG.UI.Controls
     {
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
-	    private readonly StatusImageList _statusImageList = new StatusImageList();
+        private readonly StatusImageList _statusImageList = new StatusImageList();
         private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
         private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionContextMenu _contextMenu;
         private ConnectionTreeModel _connectionTreeModel;
 
-        public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
+        //ORI 多选时会为 null
+        //public ConnectionInfo SelectedNode => (ConnectionInfo)SelectedObject;
+
+        //CBH 多选时为 排首位的高亮行
+        public ConnectionInfo SelectedNode
+        {
+            get {
+                ConnectionInfo selectedNode = (ConnectionInfo)SelectedObject;
+                if (selectedNode == null && SelectedObjects.Count>1)
+                {
+                    //CBH 多选时取首个作为选中节点（排最前面的，不是最先点击的）
+                    selectedNode = (ConnectionInfo)SelectedObjects[0];
+                }
+                return selectedNode; 
+            }
+        }
+        //CBH 添加多选的条目属性
+        //IList selectedModels => SelectedObjects;
+        public IReadOnlyList<ConnectionInfo> SelectedNodes => SelectedObjects.Cast<ConnectionInfo>().ToList();
 
         public NodeSearcher NodeSearcher { get; private set; }
 
@@ -112,15 +131,15 @@ namespace mRemoteNG.UI.Controls
                 var container = args.Model as ContainerInfo;
                 if (container == null) return;
                 container.IsExpanded = false;
-				AutoResizeColumn(Columns[0]);
-			};
+                AutoResizeColumn(Columns[0]);
+            };
             Expanded += (sender, args) =>
             {
                 var container = args.Model as ContainerInfo;
                 if (container == null) return;
                 container.IsExpanded = true;
-				AutoResizeColumn(Columns[0]);
-			};
+                AutoResizeColumn(Columns[0]);
+            };
             SelectionChanged += tvConnections_AfterSelect;
             MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
@@ -131,34 +150,34 @@ namespace mRemoteNG.UI.Controls
             AfterLabelEdit += OnAfterLabelEdit;
         }
 
-		/// <summary>
-		/// Resizes the given column to ensure that all content is shown
-		/// </summary>
-	    private void AutoResizeColumn(ColumnHeader column)
-	    {
-		    if (InvokeRequired)
-		    {
-			    Invoke((MethodInvoker) (() => AutoResizeColumn(column)));
-			    return;
-		    }
+        /// <summary>
+        /// Resizes the given column to ensure that all content is shown
+        /// </summary>
+        private void AutoResizeColumn(ColumnHeader column)
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker) (() => AutoResizeColumn(column)));
+                return;
+            }
 
-		    var longestIndentationAndTextWidth = int.MinValue;
-		    var horizontalScrollOffset = LowLevelScrollPosition.X;
-		    const int padding = 10;
+            var longestIndentationAndTextWidth = int.MinValue;
+            var horizontalScrollOffset = LowLevelScrollPosition.X;
+            const int padding = 10;
 
-		    for (var i = 0; i < Items.Count; i++)
-		    {
-			    var rowIndentation = Items[i].Position.X;
-			    var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
+            for (var i = 0; i < Items.Count; i++)
+            {
+                var rowIndentation = Items[i].Position.X;
+                var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
 
-				longestIndentationAndTextWidth = Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
-		    }
+                longestIndentationAndTextWidth = Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
+            }
 
-		    column.Width = longestIndentationAndTextWidth +
-		                   SmallImageSize.Width +
-		                   horizontalScrollOffset +
-		                   padding;
-		}
+            column.Width = longestIndentationAndTextWidth +
+                           SmallImageSize.Width +
+                           horizontalScrollOffset +
+                           padding;
+        }
 
         private void PopulateTreeView(ConnectionTreeModel newModel)
         {
@@ -166,8 +185,8 @@ namespace mRemoteNG.UI.Controls
             RegisterModelUpdateHandlers(newModel);
             NodeSearcher = new NodeSearcher(newModel);
             ExecutePostSetupActions();
-			AutoResizeColumn(Columns[0]);
-		}
+            AutoResizeColumn(Columns[0]);
+        }
 
         private void RegisterModelUpdateHandlers(ConnectionTreeModel newModel)
         {
@@ -209,8 +228,8 @@ namespace mRemoteNG.UI.Controls
                 return;
 
             RefreshObject(senderAsConnectionInfo);
-			AutoResizeColumn(Columns[0]);
-		}
+            AutoResizeColumn(Columns[0]);
+        }
 
         private void ExecutePostSetupActions()
         {
@@ -316,6 +335,20 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
+        //CBH 增加删除多个选中节点的方法
+        public void DeleteSelectedNodes()
+        {
+            if (SelectedNodes.Count > 0) //单选/多选节点时
+            {
+                foreach (ConnectionInfo node in SelectedNodes)
+                {
+                    if (node is RootNodeInfo || node is PuttySessionInfo) continue;
+                    //不进行弹框确认
+                    //if (!NodeDeletionConfirmer.Confirm(node)) continue;
+                    ConnectionTreeModel.DeleteNode(node);
+                }
+            }
+        }
         public void DeleteSelectedNode()
         {
             if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
@@ -371,25 +404,25 @@ namespace mRemoteNG.UI.Controls
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-			// disable filtering if necessary. prevents RefreshObjects from
-			// throwing an exception
-			var filteringEnabled = IsFiltering;
-			var filter = ModelFilter;
-			if (filteringEnabled)
-			{
-				ResetColumnFiltering();
-			}
+            // disable filtering if necessary. prevents RefreshObjects from
+            // throwing an exception
+            var filteringEnabled = IsFiltering;
+            var filter = ModelFilter;
+            if (filteringEnabled)
+            {
+                ResetColumnFiltering();
+            }
 
-			RefreshObject(sender);
-			AutoResizeColumn(Columns[0]);
+            RefreshObject(sender);
+            AutoResizeColumn(Columns[0]);
 
-			// turn filtering back on
-			if (filteringEnabled)
-			{
-				ModelFilter = filter;
-				UpdateFiltering();
-			}
-		}
+            // turn filtering back on
+            if (filteringEnabled)
+            {
+                ModelFilter = filter;
+                UpdateFiltering();
+            }
+        }
 
         protected override void UpdateFiltering()
         {
@@ -414,7 +447,7 @@ namespace mRemoteNG.UI.Controls
             if (mouseEventArgs.Clicks < 2) return;
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-	        var clickedNode = listItem?.RowObject as ConnectionInfo;
+            var clickedNode = listItem?.RowObject as ConnectionInfo;
             if (clickedNode == null) return;
             DoubleClickHandler.Execute(clickedNode);
         }

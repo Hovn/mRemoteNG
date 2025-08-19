@@ -71,7 +71,7 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.IsSimpleDragSource = true;
             this.olvConnections.LabelEdit = true;
             this.olvConnections.Location = new System.Drawing.Point(0, 0);
-            this.olvConnections.MultiSelect = false;
+            this.olvConnections.MultiSelect = true;  //CBH 支持多选
             this.olvConnections.Name = "olvConnections";
             this.olvConnections.NodeDeletionConfirmer = alwaysConfirmYes1;
             this.olvConnections.PostSetupActions = new mRemoteNG.UI.Controls.IConnectionTreeDelegate[0];
