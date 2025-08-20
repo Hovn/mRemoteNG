@@ -504,7 +504,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="UpdateChannel" Type="System.String" Scope="User">
-      <Value Profile="(Default)">release</Value>
+      <Value Profile="(Default)">Stable</Value>
     </Setting>
     <Setting Name="ThemeName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
