@@ -132,7 +132,7 @@ namespace mRemoteNG.UI.Window
 
             DisplayNameTextBox.Text = selectedTool?.DisplayName;
             FilenameTextBox.Text = selectedTool?.FileName;
-            ArgumentsCheckBox.Text = selectedTool?.Arguments;
+            ArgumentsTextBox.Text = selectedTool?.Arguments;
             WorkingDirTextBox.Text = selectedTool?.WorkingDir;
             WaitForExitCheckBox.Checked = selectedTool?.WaitForExit ?? false;
             TryToIntegrateCheckBox.Checked = selectedTool?.TryIntegrate ?? false;
@@ -256,7 +256,7 @@ namespace mRemoteNG.UI.Window
             {
                 selectedTool.DisplayName = DisplayNameTextBox.Text;
                 selectedTool.FileName = FilenameTextBox.Text;
-                selectedTool.Arguments = ArgumentsCheckBox.Text;
+                selectedTool.Arguments = ArgumentsTextBox.Text;
                 selectedTool.WorkingDir = WorkingDirTextBox.Text;
                 selectedTool.WaitForExit = WaitForExitCheckBox.Checked;
                 selectedTool.TryIntegrate = TryToIntegrateCheckBox.Checked;

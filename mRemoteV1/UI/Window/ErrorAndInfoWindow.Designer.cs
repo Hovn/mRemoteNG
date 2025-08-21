@@ -74,7 +74,7 @@ namespace mRemoteNG.UI.Window
 				| System.Windows.Forms.AnchorStyles.Right);
 			//this.lblMsgDate.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
             //CBH
-            this.lblMsgDate.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ErrorAndInfoWindowFont);
+            this.lblMsgDate.Font = global::mRemoteNG.Settings.Default.ErrorAndInfoWindowFont;
 
             this.lblMsgDate.Location = new System.Drawing.Point(40, 5);
 			this.lblMsgDate.Name = "lblMsgDate";
@@ -119,7 +119,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//this.cMenMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
             //CBH
-            this.cMenMC.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ErrorAndInfoWindowFont);
+            this.cMenMC.Font = global::mRemoteNG.Settings.Default.ErrorAndInfoWindowFont;
 
             this.cMenMC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.cMenMCCopy, this.cMenMCDelete});
 			this.cMenMC.Name = "cMenMC";
@@ -155,7 +155,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.pnlErrorMsg);
 			//this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
             //CBH
-			this.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ErrorAndInfoWindowFont);
+			this.Font = global::mRemoteNG.Settings.Default.ErrorAndInfoWindowFont;
             this.HideOnClose = true;
 			this.Icon = Resources.Info_Icon;
 			this.Name = "ErrorsAndInfos";

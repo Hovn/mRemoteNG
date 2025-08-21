@@ -30,8 +30,8 @@ namespace mRemoteNG
             // Add code to handle the SettingsSaving event here.
         }
 
-        //CBH 从字符串解析，获取自定义字体
-        public static Font GetCustomFont(string fontInfo)
+        //CBH 从字符串解析，获取自定义字体（未使用，已改用从settings.settings直接获取）
+        public static Font GetFontFromString_CBH(string fontInfo)
         {
             string[] array = fontInfo.Split(',');
             string familyName = array[0].Trim();

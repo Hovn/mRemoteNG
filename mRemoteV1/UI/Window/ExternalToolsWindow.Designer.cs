@@ -3,41 +3,41 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
-	public partial class ExternalToolsWindow : BaseWindow
-	{
+    public partial class ExternalToolsWindow : BaseWindow
+    {
         #region  Windows Form Designer generated code
-		internal BrightIdeasSoftware.OLVColumn FilenameColumnHeader;
+        internal BrightIdeasSoftware.OLVColumn FilenameColumnHeader;
         internal BrightIdeasSoftware.OLVColumn DisplayNameColumnHeader;
         internal BrightIdeasSoftware.OLVColumn ArgumentsColumnHeader;
         internal BrightIdeasSoftware.OLVColumn WaitForExitColumnHeader;
         internal BrightIdeasSoftware.OLVColumn TryToIntegrateColumnHeader;
-	    internal BrightIdeasSoftware.OLVColumn WorkingDirColumnHeader;
-	    internal BrightIdeasSoftware.OLVColumn RunElevateHeader;
-		internal Controls.Base.NGTextBox DisplayNameTextBox;
+        internal BrightIdeasSoftware.OLVColumn WorkingDirColumnHeader;
+        internal BrightIdeasSoftware.OLVColumn RunElevateHeader;
+        internal Controls.Base.NGTextBox DisplayNameTextBox;
         internal BrightIdeasSoftware.OLVColumn ShowOnToolbarColumnHeader;
-		internal Controls.Base.NGLabel DisplayNameLabel;
-		internal Controls.Base.NGTextBox ArgumentsCheckBox;
-		internal Controls.Base.NGTextBox FilenameTextBox;
-		internal Controls.Base.NGLabel ArgumentsLabel;
-		internal Controls.Base.NGLabel FilenameLabel;
-		internal Controls.Base.NGButton BrowseButton; 
-		internal System.Windows.Forms.ContextMenuStrip ToolsContextMenuStrip;
-		internal System.Windows.Forms.ToolStripMenuItem NewToolMenuItem;
-		internal System.Windows.Forms.ToolStripMenuItem DeleteToolMenuItem;
-		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
-		internal System.Windows.Forms.ToolStripMenuItem LaunchToolMenuItem; 
-		internal Controls.Base.NGCheckBox WaitForExitCheckBox;
-		internal Controls.Base.NGLabel OptionsLabel;
-		internal Controls.Base.NGCheckBox TryToIntegrateCheckBox;
+        internal Controls.Base.NGLabel DisplayNameLabel;
+        internal Controls.Base.NGTextBox ArgumentsTextBox;
+        internal Controls.Base.NGTextBox FilenameTextBox;
+        internal Controls.Base.NGLabel ArgumentsLabel;
+        internal Controls.Base.NGLabel FilenameLabel;
+        internal Controls.Base.NGButton BrowseButton;
+        internal System.Windows.Forms.ContextMenuStrip ToolsContextMenuStrip;
+        internal System.Windows.Forms.ToolStripMenuItem NewToolMenuItem;
+        internal System.Windows.Forms.ToolStripMenuItem DeleteToolMenuItem;
+        internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
+        internal System.Windows.Forms.ToolStripMenuItem LaunchToolMenuItem;
+        internal Controls.Base.NGCheckBox WaitForExitCheckBox;
+        internal Controls.Base.NGLabel OptionsLabel;
+        internal Controls.Base.NGCheckBox TryToIntegrateCheckBox;
         internal Controls.Base.NGCheckBox ShowOnToolbarCheckBox;
         internal Controls.Base.NGListView ToolsListObjView;
-	    internal Controls.Base.NGLabel WorkingDirLabel;
-	    internal Controls.Base.NGTextBox WorkingDirTextBox;
-	    internal Controls.Base.NGButton BrowseWorkingDir;
-	    internal Controls.Base.NGCheckBox RunElevatedCheckBox;
+        internal Controls.Base.NGLabel WorkingDirLabel;
+        internal Controls.Base.NGTextBox WorkingDirTextBox;
+        internal Controls.Base.NGButton BrowseWorkingDir;
+        internal Controls.Base.NGCheckBox RunElevatedCheckBox;
 
         private void InitializeComponent()
-		{
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExternalToolsWindow));
             this.ToolsListObjView = new mRemoteNG.UI.Controls.Base.NGListView();
@@ -64,7 +64,7 @@ namespace mRemoteNG.UI.Window
             this.OptionsLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.WaitForExitCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.BrowseButton = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.ArgumentsTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.FilenameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.DisplayNameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.ArgumentsLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -96,8 +96,8 @@ namespace mRemoteNG.UI.Window
             this.ToolsListObjView.AllColumns.Add(this.TryToIntegrateColumnHeader);
             this.ToolsListObjView.AllColumns.Add(this.RunElevateHeader);
             this.ToolsListObjView.AllColumns.Add(this.ShowOnToolbarColumnHeader);
-            this.ToolsListObjView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ToolsListObjView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ToolsListObjView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ToolsListObjView.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.F2Only;
@@ -250,7 +250,7 @@ namespace mRemoteNG.UI.Window
             // 
             // PropertiesGroupBox
             // 
-            this.PropertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.PropertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PropertiesGroupBox.Controls.Add(this.ShowOnToolbarCheckBox);
             this.PropertiesGroupBox.Controls.Add(this.RunElevatedCheckBox);
@@ -261,7 +261,7 @@ namespace mRemoteNG.UI.Window
             this.PropertiesGroupBox.Controls.Add(this.OptionsLabel);
             this.PropertiesGroupBox.Controls.Add(this.WaitForExitCheckBox);
             this.PropertiesGroupBox.Controls.Add(this.BrowseButton);
-            this.PropertiesGroupBox.Controls.Add(this.ArgumentsCheckBox);
+            this.PropertiesGroupBox.Controls.Add(this.ArgumentsTextBox);
             this.PropertiesGroupBox.Controls.Add(this.FilenameTextBox);
             this.PropertiesGroupBox.Controls.Add(this.DisplayNameTextBox);
             this.PropertiesGroupBox.Controls.Add(this.ArgumentsLabel);
@@ -389,20 +389,20 @@ namespace mRemoteNG.UI.Window
             this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             this.BrowseButton.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
-            // ArgumentsCheckBox
+            // ArgumentsTextBox
             // 
-            this.ArgumentsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ArgumentsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ArgumentsCheckBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ArgumentsCheckBox.Location = new System.Drawing.Point(126, 76);
-            this.ArgumentsCheckBox.Name = "ArgumentsCheckBox";
-            this.ArgumentsCheckBox.Size = new System.Drawing.Size(591, 22);
-            this.ArgumentsCheckBox.TabIndex = 4;
-            this.ArgumentsCheckBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
+            this.ArgumentsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ArgumentsTextBox.Location = new System.Drawing.Point(126, 76);
+            this.ArgumentsTextBox.Name = "ArgumentsTextBox";
+            this.ArgumentsTextBox.Size = new System.Drawing.Size(591, 22);
+            this.ArgumentsTextBox.TabIndex = 4;
+            this.ArgumentsTextBox.LostFocus += new System.EventHandler(this.PropertyControl_ChangedOrLostFocus);
             // 
             // FilenameTextBox
             // 
-            this.FilenameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.FilenameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FilenameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.FilenameTextBox.Location = new System.Drawing.Point(126, 47);
@@ -413,7 +413,7 @@ namespace mRemoteNG.UI.Window
             // 
             // DisplayNameTextBox
             // 
-            this.DisplayNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.DisplayNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DisplayNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DisplayNameTextBox.Location = new System.Drawing.Point(126, 19);
@@ -530,7 +530,7 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.ToolStripContainer);
             //this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             //CBH
-            this.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ExternalToolsWindowFont);
+            this.Font = global::mRemoteNG.Settings.Default.ExternalToolsWindowFont;
 
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExternalToolsWindow";
@@ -551,13 +551,13 @@ namespace mRemoteNG.UI.Window
             this.ToolStrip.PerformLayout();
             this.ResumeLayout(false);
 
-		}
-		internal System.Windows.Forms.ToolStripContainer ToolStripContainer;
-		internal System.Windows.Forms.ToolStrip ToolStrip;
-		internal System.Windows.Forms.ToolStripButton NewToolToolstripButton;
-		internal System.Windows.Forms.ToolStripButton DeleteToolToolstripButton;
-		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
-		internal System.Windows.Forms.ToolStripButton LaunchToolToolstripButton;
+        }
+        internal System.Windows.Forms.ToolStripContainer ToolStripContainer;
+        internal System.Windows.Forms.ToolStrip ToolStrip;
+        internal System.Windows.Forms.ToolStripButton NewToolToolstripButton;
+        internal System.Windows.Forms.ToolStripButton DeleteToolToolstripButton;
+        internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
+        internal System.Windows.Forms.ToolStripButton LaunchToolToolstripButton;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
         #endregion
 

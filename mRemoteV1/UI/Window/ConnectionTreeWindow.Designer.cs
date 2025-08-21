@@ -134,7 +134,7 @@ namespace mRemoteNG.UI.Window
             // 
             //this.msMain.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             //CBH ×ÖÌå
-            this.msMain.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ConnectionTreeWindowFont);
+            this.msMain.Font = global::mRemoteNG.Settings.Default.ConnectionTreeWindowFont;
 
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 this.mMenAddConnection,
@@ -215,7 +215,7 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.pnlConnections);
             //this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             //CBH
-            this.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ConnectionTreeWindowFont);
+            this.Font = global::mRemoteNG.Settings.Default.ConnectionTreeWindowFont;
 
             this.HideOnClose = true;
             this.Icon = global::mRemoteNG.Resources.Root_Icon;

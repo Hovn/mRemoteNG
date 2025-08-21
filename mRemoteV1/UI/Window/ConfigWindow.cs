@@ -96,7 +96,7 @@ namespace mRemoteNG.UI.Window
             _pGrid.ContextMenuStrip = PropertyGridContextMenu;
             //_pGrid.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             //CBH
-            _pGrid.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ConfigWindowFont);
+            _pGrid.Font = global::mRemoteNG.Settings.Default.ConfigWindowFont;
             
             _pGrid.HiddenAttributes = null;
             _pGrid.HiddenProperties = null;
@@ -199,7 +199,7 @@ namespace mRemoteNG.UI.Window
             Controls.Add(_pGrid);
             //Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             //CBH 自定义字体
-            this.Font = global::mRemoteNG.Settings.GetCustomFont(global::mRemoteNG.Settings.Default.ConfigWindowFont);
+            this.Font = global::mRemoteNG.Settings.Default.ConfigWindowFont;
 
             HideOnClose = true;
             Icon = Resources.Config_Icon;

@@ -667,7 +667,7 @@ namespace mRemoteNG.UI.Controls
                         Image = extTool.Image
                     };
                     //CBH 字体：连接项右键外部工具菜单可使用自定义字体
-                    menuItem.Font = Settings.GetCustomFont(Settings.Default.ConnectionTreeWindowExtAppsMenuFont);
+                    menuItem.Font = Settings.Default.ConnectionTreeWindowExtAppsMenuFont;
                     menuItem.Click += OnExternalToolClicked;
                     _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
                 }
@@ -697,10 +697,16 @@ namespace mRemoteNG.UI.Controls
                 {
                     var asContainer = node as ContainerInfo;
                     if (asContainer != null)
+                    {
                         //连接容器下的所有服务器
                         _connectionInitiator.OpenConnection(asContainer, ConnectionInfo.Force.DoNotJump);
+                    }
                     else
+                    {
                         _connectionInitiator.OpenConnection(node, ConnectionInfo.Force.DoNotJump);
+                        //await Task.Delay(1500);  //CBH 批量打开多选的多个连接，每次延时
+                    }
+
                 }
             }
 
@@ -758,6 +764,7 @@ namespace mRemoteNG.UI.Controls
                 _connectionInitiator.OpenConnection(_connectionTree.SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
         }
 
+        //CBH
         private void OnDisconnectClicked(object sender, EventArgs e)
         {
             if (_connectionTree.SelectedNodes.Count > 0) //单选/多选节点时
@@ -848,7 +855,15 @@ namespace mRemoteNG.UI.Controls
 
         private void OnDeleteClicked(object sender, EventArgs e)
         {
+            //CBH 不弹框确认，直接删除
             _connectionTree.DeleteSelectedNodes();
+            //if (_connectionTree.SelectedNodes.Count > 1)// 如果 >1 则为多选模式，不弹框，直接删除
+            //{
+            //    _connectionTree.DeleteSelectedNodes();
+            //    return;
+            //}
+           
+            //ORI 会弹框确认
             //_connectionTree.DeleteSelectedNode();
         }
 
@@ -912,7 +927,7 @@ namespace mRemoteNG.UI.Controls
             //ORI
             //StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
 
-            //CBH 入参增加选中的节点
+            //CBH
             StartExternalApp_CBH((ExternalTool)((ToolStripMenuItem)sender).Tag);
             //StartExternalApp_CBH((ExternalTool)((ToolStripMenuItem)sender).Tag, _connectionTree.SelectedNode);
         }
@@ -941,7 +956,7 @@ namespace mRemoteNG.UI.Controls
                     foreach (ConnectionInfo node in _connectionTree.SelectedNodes)
                     {
                         StartExternalApp_CBH(externalTool, node);
-                        await Task.Delay(1500); //每启动一个等待一会
+                        await Task.Delay(2000); //每启动一个等待一会
                     }
                 }
 
@@ -970,7 +985,7 @@ namespace mRemoteNG.UI.Controls
                     foreach (ConnectionInfo child in container.Children)
                     {
                         StartExternalApp_CBH(externalTool, child);   // 递归
-                        await Task.Delay(1500);                      // 每启动一个等待一会 （后续计划使用配置文件配置）
+                        await Task.Delay(2000);                      // 每启动一个等待一会 （后续计划使用配置文件配置）
                     }
                     //return;
                 }
