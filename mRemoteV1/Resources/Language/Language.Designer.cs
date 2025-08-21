@@ -803,7 +803,7 @@ namespace mRemoteNG {
         ///   查找类似 The (RDP) Sessions feature requires that you have a copy of eolwtscom.dll registered on your system.
         ///mRemoteNG ships with this component but it is not registered automatically if you do not use the mRemoteNG Installer.
         ///To register it manually, run the following command from an elevated command prompt: regsvr32 &quot;C:\Program Files\mRemoteNG\eolwtscom.dll&quot; (where C:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
-        ///If this check still fails or you are unable to use the (RDP) Sessions feature [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///If this check still fails or you are unable to use the (RDP) Sessions feat [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string strCcEOLFailed {
             get {
@@ -824,7 +824,7 @@ namespace mRemoteNG {
         ///   查找类似 To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
         ///You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
         ///When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
-        ///If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please cons [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please c [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string strCcGeckoFailed {
             get {
@@ -844,7 +844,7 @@ namespace mRemoteNG {
         /// <summary>
         ///   查找类似 ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
         ///If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
-        ///To do this open up the run dialog (Start - Run) and enter the following: regsvr32 &quot;c:\Program Files\Citrix\ICA Client\wfica.ocx&quot; (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin installat [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///To do this open up the run dialog (Start - Run) and enter the following: regsvr32 &quot;c:\Program Files\Citrix\ICA Client\wfica.ocx&quot; (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin install [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string strCcICAFailed {
             get {
@@ -1379,6 +1379,15 @@ namespace mRemoteNG {
         internal static string strConfirmDeleteNodeFolderNotEmpty {
             get {
                 return ResourceManager.GetString("strConfirmDeleteNodeFolderNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Are you sure you want to delete the selected node? 的本地化字符串。
+        /// </summary>
+        internal static string strConfirmDeleteNodeSelected {
+            get {
+                return ResourceManager.GetString("strConfirmDeleteNodeSelected", resourceCulture);
             }
         }
         

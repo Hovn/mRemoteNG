@@ -478,6 +478,9 @@ VncSharp 版本 {0}</value>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>确定要删除目录"{0}"？目录下所有目录及连接都将被删除！</value>
   </data>
+  <data name="strConfirmDeleteNodeSelected" xml:space="preserve">
+    <value>确定要删除所有选中项吗？所选节点(含其子节点)都将被删除！</value>
+  </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>确认要关闭所有已打开的连接吗？</value>
   </data>
@@ -2627,10 +2630,10 @@ mRemoteNG 将退出并安装更新。</value>
     <value>工作目录：</value>
   </data>
   <data name="strRunElevated" xml:space="preserve">
-    <value>特权运行</value>
+    <value>提权运行</value>
   </data>
   <data name="strRunElevateHeader" xml:space="preserve">
-    <value>特权运行</value>
+    <value>提权运行</value>
   </data>
   <data name="strShowOnToolbarColumnHeader" xml:space="preserve">
     <value>显示在工具栏</value>
