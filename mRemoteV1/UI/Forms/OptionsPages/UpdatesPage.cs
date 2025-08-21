@@ -50,9 +50,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblProxyPassword.Text = Language.strLabelPassword;
 
             btnTestProxy.Text = Language.strButtonTestProxy;
+
             //CBH
             lblReleaseChannel.Text = Language.strReleaseChannel;
             textBox1.Text = Language.strReleaseChannelExplanation;
+            //
         }
 
         public override void LoadSettings()

@@ -8,6 +8,12 @@ namespace mRemoteNG.App.Info
         public const string STABLE = "Stable";
         public const string BETA = "Beta";
         public const string DEV = "Development";
+        public enum UpdateChannel
+        {
+            Stable,
+            Beta,
+            Development
+        }
 
         /* no #if here since they are used for unit tests as well */
         public const string STABLE_PORTABLE = "update-portable.txt";
