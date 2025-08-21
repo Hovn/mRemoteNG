@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -28,6 +29,15 @@ namespace mRemoteNG.Tree
             return UserConfirmsConnectionDeletion(deletionTarget);
         }
 
+        //CBH 暂未使用
+        public bool Confirm(IReadOnlyList<ConnectionInfo> deletionTargets) //Collection
+        {
+            if (deletionTargets == null)
+                return false;
+
+            return UserConfirmsSelectedNodeDeletion();
+        }
+
         private bool UserConfirmsEmptyFolderDeletion(AbstractConnectionRecord deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, deletionTarget.Name);
@@ -43,6 +53,11 @@ namespace mRemoteNG.Tree
         private bool UserConfirmsConnectionDeletion(AbstractConnectionRecord deletionTarget)
         {
             var messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, deletionTarget.Name);
+            return PromptUser(messagePrompt);
+        }
+        private bool UserConfirmsSelectedNodeDeletion()
+        {
+            var messagePrompt = Language.strConfirmDeleteNodeSelected;
             return PromptUser(messagePrompt);
         }
 
