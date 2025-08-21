@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -18,6 +20,7 @@ namespace mRemoteNG.Tools
         private string _displayName;
         private string _fileName;
         private bool _waitForExit;
+        private int _waitAfterStart = 0;
         private string _arguments;
         private string _workingDir;
         private bool _tryIntegrate;
@@ -50,6 +53,19 @@ namespace mRemoteNG.Tools
             }
         }
 
+        public int WaitAfterStart
+        {
+            get { return _waitAfterStart; }
+            set
+            {
+                // WaitAfterStart cannot be turned on when TryIntegrate is true
+                if (TryIntegrate)
+                    return;
+                SetField(ref _waitAfterStart, value, nameof(WaitAfterStart));
+            }
+        }
+
+
         public string Arguments
         {
             get { return _arguments; }
@@ -69,7 +85,11 @@ namespace mRemoteNG.Tools
             {
                 // WaitForExit cannot be turned on when TryIntegrate is true
                 if (value)
+                {
                     WaitForExit = false;
+                    //WaitAfterStart = 0;
+                }
+                   
                 SetField(ref _tryIntegrate, value, nameof(TryIntegrate));
             }
         }
@@ -149,9 +169,23 @@ namespace mRemoteNG.Tools
             SetProcessProperties(process, ConnectionInfo);
             process.Start();
 
-            if (WaitForExit)
+            Console.WriteLine("WaitForExit:"+ WaitForExit+ " , WaitAfterStart:"+ WaitAfterStart);
+            if (WaitForExit)  
             {
                 process.WaitForExit();
+                return;
+            }
+
+            //CBH
+            //-1 时 表示等待退出，大于0 表示等待相应的时间
+            if (WaitAfterStart == -1)  //等效于 WaitForExit=true
+            {
+                process.WaitForExit();
+            }
+            else if(WaitAfterStart > 0)
+            {
+                //await Task.Delay(WaitAfterStart);  //异步式  方法签名应该必须是 async Task 才有效
+                Thread.Sleep(WaitAfterStart);  //阻塞式
             }
         }
 
@@ -195,7 +229,7 @@ namespace mRemoteNG.Tools
         {
             newConnectionInfo.Protocol = ProtocolType.IntApp;
             newConnectionInfo.ExtApp = DisplayName;
-            newConnectionInfo.Name = DisplayName;
+            //newConnectionInfo.Name = DisplayName;  //CBH 修正 名字还应保持原名字，否则传递给外部工具的 %name% 会变为外部工具名
             newConnectionInfo.Panel = Language.strMenuExternalTools;
         }
 

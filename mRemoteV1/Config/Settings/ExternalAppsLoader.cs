@@ -77,21 +77,14 @@ namespace mRemoteNG.Config.Settings
                     extA.WorkingDir = xEl.Attributes["WorkingDir"].Value;
                 if (xEl.HasAttribute("RunElevated"))
                     extA.RunElevated = bool.Parse(xEl.Attributes["RunElevated"].Value);
-
                 if (xEl.HasAttribute("WaitForExit"))
-                {
                     extA.WaitForExit = bool.Parse(xEl.Attributes["WaitForExit"].Value);
-                }
-
+                if (xEl.HasAttribute("WaitAfterStart"))
+                    extA.WaitAfterStart = int.Parse(xEl.Attributes["WaitAfterStart"].Value);
                 if (xEl.HasAttribute("TryToIntegrate"))
-                {
                     extA.TryIntegrate = bool.Parse(xEl.Attributes["TryToIntegrate"].Value);
-                }
-
                 if (xEl.HasAttribute("ShowOnToolbar"))
-                {
                     extA.ShowOnToolbar = bool.Parse(xEl.Attributes["ShowOnToolbar"].Value);
-                }
 
                 _messageCollector.AddMessage(MessageClass.InformationMsg, $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}", true);
                 Runtime.ExternalToolsService.ExternalTools.Add(extA);
