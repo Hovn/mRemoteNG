@@ -70,7 +70,8 @@ namespace mRemoteNG.Connection
         }
 
         #region Private
-        private async void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
+        //连接容器
+        private void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
         {
             var children = containerInfo.Children;
             if (children.Count == 0) return;
@@ -84,14 +85,14 @@ namespace mRemoteNG.Connection
                 else
                 {
                     OpenConnection(child, force, conForm);
-                    await Task.Delay(500);  //CBH 批量打开容器内连接，每次延时500ms
+                    //await Task.Delay(500);  //CBH 批量打开容器内连接，每次延时500ms
                 }
             }
             //List<ConnectionInfo>.Enumerator enumerator = default(List<ConnectionInfo>.Enumerator);
-
         }
-        //原有方法（去掉_ORI）
-        private void OpenConnection_ORI(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
+
+        //连接服务器 原有方法（去掉_ORI）
+        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
         {
             try
             {
@@ -103,6 +104,22 @@ namespace mRemoteNG.Connection
 
                 StartPreConnectionExternalApp(connectionInfo);
 
+                //CBH 优化
+                //原版方法：如果是从连接树节点启动的话，如果是外部工具（即便尝试集成未打钩），还是会尝试在窗口中新建标签页打开（标签页创建后马上又销毁，屏幕会闪一下）
+                //优化：判断连接项是外部工具，并且该外部工具未勾选‘尝试集成’，则直接启动外部工具，不再尝试在新标签页中打开
+                if (connectionInfo.Protocol == ProtocolType.IntApp && connectionInfo.ExtApp != "")
+                {
+                    ExternalTool extAppByName = Runtime.ExternalToolsService.GetExtAppByName(connectionInfo.ExtApp);
+                    if (extAppByName != null && !extAppByName.TryIntegrate)
+                    {
+                        //未勾选‘尝试集成’则直接启动外部工具
+                        extAppByName.Start(connectionInfo);
+                        return;
+                    }
+                }
+                //优化结束
+
+                //如果已打开，切换到打开的标签页
                 if ((force & ConnectionInfo.Force.DoNotJump) != ConnectionInfo.Force.DoNotJump)
                 {
                     if (SwitchToOpenConnection(connectionInfo))
@@ -137,6 +154,7 @@ namespace mRemoteNG.Connection
                 connectionInfo.OpenConnections.Add(newProtocol);
                 _activeConnections.Add(connectionInfo.ConstantID);
                 FrmMain.Default.SelectedConnection = connectionInfo;
+                //await Task.Delay(500);  //CBH 打开连接后，延时500ms  方法签名必须是 async Task 才有效
             }
             catch (Exception ex)
             {
@@ -144,14 +162,14 @@ namespace mRemoteNG.Connection
             }
         }
 
-        //CBH 替换 OpenConnection 的方法 （_CBH）
-        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
+        //CBH 替换 OpenConnection 的方法 （去掉_CBH）。暂未使用
+        private void OpenConnection_CBH(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
         {
             this.OpenConnection_CBH(connectionInfo, force, conForm, false);
         }
 
 
-        //CBH 修改，增加入参：是否来自容器
+        //CBH 修改，增加入参：是否来自容器。暂未使用
         private void OpenConnection_CBH(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm, bool fromContainer)
         {
             try
@@ -169,12 +187,13 @@ namespace mRemoteNG.Connection
                 if (connectionInfo.Protocol == ProtocolType.IntApp && connectionInfo.ExtApp != "")
                 {
                     ExternalTool extAppByName = Runtime.ExternalToolsService.GetExtAppByName(connectionInfo.ExtApp);
-                    //不尝试集成则直接启动外部工具
                     if (extAppByName != null && !extAppByName.TryIntegrate)
                     {
+                        //未勾选‘尝试集成’则直接启动外部工具，避免在新标签也中打开（屏幕会闪一下）
                         extAppByName.Start(connectionInfo);
                         return;
                     }
+
                     //不是来自容器的批量启动，并且使用的是 Radmin 外部工具，进行特殊优化
                     //CBH：后续应该还需要优化代码
                     if (extAppByName != null && !fromContainer && extAppByName.DisplayName.StartsWith("Radmin", StringComparison.OrdinalIgnoreCase))
@@ -188,6 +207,7 @@ namespace mRemoteNG.Connection
                             WorkingDir = extAppByName.WorkingDir,
                             RunElevated = extAppByName.RunElevated,
                             WaitForExit = extAppByName.WaitForExit,
+                            WaitAfterStart = extAppByName.WaitAfterStart,
                             TryIntegrate = false,
                             ShowOnToolbar = false
                         }.Start(connectionInfo);
