@@ -31,12 +31,12 @@ namespace mRemoteNG.UI.Forms
             FontOverrider.FontOverride(this);
             SetImageListForListView();
             AddOptionsPagesToListView();
-            SetInitiallyActivatedPage();
             ApplyLanguage();
             ApplyTheme();
             Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
-            lstOptionPages.SelectedIndex = 0;
+            SetInitiallyActivatedPage();  //CBH 要在语言和主体等初始化后，窗体才能正常显示
+            //lstOptionPages.SelectedIndex = 0;  //CBH  这个不要，否则总是显示第一个页面
         }
         private void ApplyTheme()
         {
@@ -103,12 +103,16 @@ namespace mRemoteNG.UI.Forms
             {
                 if (!lstOptionPages.Items[i].Text.Equals(_pageName)) continue;
                 lstOptionPages.Items[i].Selected = true;
+                //lstOptionPages.SelectedIndex = i;
                 isSet = true;
                 break;
             }
 
-            if(!isSet)
+            if (!isSet)
+            {
                 lstOptionPages.Items[0].Selected = true;
+                //lstOptionPages.SelectedIndex = 0;
+            }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
