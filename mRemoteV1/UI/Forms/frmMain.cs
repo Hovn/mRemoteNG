@@ -298,19 +298,31 @@ namespace mRemoteNG.UI.Forms
                 Language.strAskUpdatesCommandAskLater
             };
 
-            CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProductName),
-                "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
+            CTaskDialog.ShowTaskDialogBox(this, 
+                GeneralAppInfo.ProductName, 
+                Language.strAskUpdatesMainInstruction, 
+                string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProductName),
+                "", "", "", "", 
+                string.Join(" | ", commandButtons), 
+                ETaskDialogButtons.None, 
+                ESysIcons.Question, 
+                ESysIcons.Question);
 
-            if (CTaskDialog.CommandButtonResult == 0 | CTaskDialog.CommandButtonResult == 1)
+            switch (CTaskDialog.CommandButtonResult)
             {
-                Settings.Default.CheckForUpdatesAsked = true;
-            }
-
-            if (CTaskDialog.CommandButtonResult != 1) return;
-
-            using (var optionsForm = new frmOptions(Language.strTabUpdates))
-            {
-                optionsForm.ShowDialog(this);
+                case 0:
+                    Settings.Default.CheckForUpdatesAsked = true;
+                    break;
+                case 1:
+                    Settings.Default.CheckForUpdatesAsked = true;
+                    using (var optionsForm = new frmOptions(Language.strTabUpdates))
+                    {
+                        optionsForm.ShowDialog(this);
+                    }
+                    break;
+                case 2:
+                    Settings.Default.CheckForUpdatesAsked = false;
+                    break;
             }
         }
 
