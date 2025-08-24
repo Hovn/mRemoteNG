@@ -176,17 +176,17 @@ namespace mRemoteNG.Tools
                 return;
             }
 
-            //CBH
+            //CBH 延时操作现放在调用方的for循环中，此处暂不使用
             //-1 时 表示等待退出，大于0 表示等待相应的时间
-            if (WaitAfterStart == -1)  //等效于 WaitForExit=true
-            {
-                process.WaitForExit();
-            }
-            else if(WaitAfterStart > 0)
-            {
-                //await Task.Delay(WaitAfterStart);  //异步式  方法签名应该必须是 async Task 才有效
-                Thread.Sleep(WaitAfterStart);  //阻塞式
-            }
+            //if (WaitAfterStart == -1)  //等效于 WaitForExit=true
+            //{
+            //    process.WaitForExit();
+            //}
+            //else if(WaitAfterStart > 0)
+            //{
+            //    //await Task.Delay(WaitAfterStart);  //异步式  方法签名应该必须是 async Task 才有效  否则可能空跑不生效
+            //    Thread.Sleep(WaitAfterStart);  //阻塞式
+            //}
         }
 
         private void SetProcessProperties(Process process, ConnectionInfo startConnectionInfo)

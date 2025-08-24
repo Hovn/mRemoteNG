@@ -956,7 +956,7 @@ namespace mRemoteNG.UI.Controls
                     foreach (ConnectionInfo node in _connectionTree.SelectedNodes)
                     {
                         StartExternalApp_CBH(externalTool, node);
-                        await Task.Delay(2000); //每启动一个等待一会
+                        await Task.Delay(externalTool.WaitAfterStart); //每启动一个等待一会
                     }
                 }
 
@@ -985,7 +985,7 @@ namespace mRemoteNG.UI.Controls
                     foreach (ConnectionInfo child in container.Children)
                     {
                         StartExternalApp_CBH(externalTool, child);   // 递归
-                        await Task.Delay(2000);                      // 每启动一个等待一会 （后续计划使用配置文件配置）
+                        await Task.Delay(externalTool.WaitAfterStart); // 每启动一个等待一会，使用配置文件配置
                     }
                     //return;
                 }
