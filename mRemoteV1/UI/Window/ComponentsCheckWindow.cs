@@ -646,7 +646,7 @@ namespace mRemoteNG.UI.Window
                 lblCheck5.ForeColor = Color.DarkOliveGreen;
                 lblCheck5.Text = @"Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckSucceeded;
                 if (!Xpcom.IsInitialized)
-                    Xpcom.Initialize("Firefox");
+                    Xpcom.Initialize("Firefox");  //CBH 组件检查这里会崩溃:System.DllNotFoundException:“无法加载 DLL“mozglue”: 找不到指定的模块。 (异常来自 HRESULT:0x8007007E)。
                 txtCheck5.Text = Language.strCcGeckoOK + " Version: " + Xpcom.XulRunnerVersion;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Gecko Browser installed", true);
             }
