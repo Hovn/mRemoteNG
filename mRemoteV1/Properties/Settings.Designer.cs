@@ -157,18 +157,6 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CustomConsPath {
-            get {
-                return ((string)(this["CustomConsPath"]));
-            }
-            set {
-                this["CustomConsPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SaveConsOnExit {
             get {
@@ -2355,18 +2343,6 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LogFilePath {
-            get {
-                return ((string)(this["LogFilePath"]));
-            }
-            set {
-                this["LogFilePath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool TextLogMessageWriterWriteDebugMsgs {
             get {
@@ -2737,54 +2713,6 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 8.25pt, style=Regular")]
-        public global::System.Drawing.Font CustomFont {
-            get {
-                return ((global::System.Drawing.Font)(this["CustomFont"]));
-            }
-            set {
-                this["CustomFont"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 8.25pt, style=Regular")]
-        public global::System.Drawing.Font UIFont {
-            get {
-                return ((global::System.Drawing.Font)(this["UIFont"]));
-            }
-            set {
-                this["UIFont"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Fira Code, 8.25pt, style=Regular")]
-        public global::System.Drawing.Font MonoFont {
-            get {
-                return ((global::System.Drawing.Font)(this["MonoFont"]));
-            }
-            set {
-                this["MonoFont"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt, style=Regular")]
-        public global::System.Drawing.Font ExternalToolsWindowFont {
-            get {
-                return ((global::System.Drawing.Font)(this["ExternalToolsWindowFont"]));
-            }
-            set {
-                this["ExternalToolsWindowFont"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt")]
         public global::System.Drawing.Font ErrorAndInfoWindowFont {
             get {
@@ -2804,18 +2732,6 @@ namespace mRemoteNG {
             }
             set {
                 this["ConfigWindowFont"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt")]
-        public global::System.Drawing.Font ConnectionTreeWindowFont {
-            get {
-                return ((global::System.Drawing.Font)(this["ConnectionTreeWindowFont"]));
-            }
-            set {
-                this["ConnectionTreeWindowFont"] = value;
             }
         }
         
@@ -2858,6 +2774,90 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CustomConsPath {
+            get {
+                return ((string)(this["CustomConsPath"]));
+            }
+            set {
+                this["CustomConsPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("mRemoteNG.log")]
+        public string LogFilePath {
+            get {
+                return ((string)(this["LogFilePath"]));
+            }
+            set {
+                this["LogFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 8.25pt")]
+        public global::System.Drawing.Font CustomFont {
+            get {
+                return ((global::System.Drawing.Font)(this["CustomFont"]));
+            }
+            set {
+                this["CustomFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 8.25pt")]
+        public global::System.Drawing.Font UIFont {
+            get {
+                return ((global::System.Drawing.Font)(this["UIFont"]));
+            }
+            set {
+                this["UIFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Fira Code, 8.25pt")]
+        public global::System.Drawing.Font MonoFont {
+            get {
+                return ((global::System.Drawing.Font)(this["MonoFont"]));
+            }
+            set {
+                this["MonoFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 9pt")]
+        public global::System.Drawing.Font ExternalToolsWindowFont {
+            get {
+                return ((global::System.Drawing.Font)(this["ExternalToolsWindowFont"]));
+            }
+            set {
+                this["ExternalToolsWindowFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 11pt")]
+        public global::System.Drawing.Font ConnectionTreeWindowFont {
+            get {
+                return ((global::System.Drawing.Font)(this["ConnectionTreeWindowFont"]));
+            }
+            set {
+                this["ConnectionTreeWindowFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
         public string ConnectionTreeWindowSSHTransferFileMenuUse {
             get {
                 return ((string)(this["ConnectionTreeWindowSSHTransferFileMenuUse"]));

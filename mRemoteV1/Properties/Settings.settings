@@ -35,9 +35,6 @@
     <Setting Name="LoadConsFromCustomLocation" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CustomConsPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="SaveConsOnExit" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -584,9 +581,6 @@
     <Setting Name="ConDefaultCredentialRecord" Type="System.Guid" Scope="User">
       <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
     </Setting>
-    <Setting Name="LogFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="TextLogMessageWriterWriteDebugMsgs" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -680,44 +674,44 @@
     <Setting Name="OverrideFIPSCheck" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-
-    <Setting Name="CustomFont" Type="System.Drawing.Font" Scope="User">
-      <!--<Value Profile="(Default)">Segoe UI, 8.25pt, style=Bold, Italic, Underline, Strikeout</Value>-->
-      <Value Profile="(Default)">Segoe UI, 8.25pt, style=Regular</Value>
-    </Setting>
-    <Setting Name="UIFont" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Segoe UI, 8.25pt, style=Regular</Value>
-    </Setting>
-    <Setting Name="MonoFont" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Fira Code, 8.25pt, style=Regular</Value>
-    </Setting>
-
-    <Setting Name="ExternalToolsWindowFont" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Segoe UI, 9pt, style=Regular</Value>
-    </Setting>
     <Setting Name="ErrorAndInfoWindowFont" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Segoe UI, 9pt</Value>
     </Setting>
     <Setting Name="ConfigWindowFont" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Segoe UI, 9pt</Value>
     </Setting>
-    <Setting Name="ConnectionTreeWindowFont" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">Segoe UI, 9pt</Value>
-    </Setting>
     <Setting Name="ConnectionTreeWindowExtAppsMenuFont" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Segoe UI, 9pt</Value>
     </Setting>
-
     <Setting Name="ConnectionTreeRowHeight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="ConnectionTreeRowIconPx" Type="System.Int32" Scope="User">
-      <!--<Value Profile="(Default)">16</Value>-->
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="ConnectionTreeWindowSSHTransferFileMenuUse" Type="System.String" Scope="User">
+    <Setting Name="CustomConsPath" Type="System.String" Scope="User">
       <Value Profile="(Default)"></Value>
     </Setting>
-
+    <Setting Name="LogFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mRemoteNG.log</Value>
+    </Setting>
+    <Setting Name="CustomFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 8.25pt</Value>
+    </Setting>
+    <Setting Name="UIFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 8.25pt</Value>
+    </Setting>
+    <Setting Name="MonoFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Fira Code, 8.25pt</Value>
+    </Setting>
+    <Setting Name="ExternalToolsWindowFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 9pt</Value>
+    </Setting>
+    <Setting Name="ConnectionTreeWindowFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 11pt</Value>
+    </Setting>
+    <Setting Name="ConnectionTreeWindowSSHTransferFileMenuUse" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
