@@ -312,7 +312,7 @@ namespace mRemoteNG.Connection
             else
             {
                 Settings.Default.LoadConsFromCustomLocation = true;
-                Settings.Default.CustomConsPath = filename;
+                Settings.Default.CustomConsPath = ConnectionsFileInfo.MakeRelativeIfPossible(filename);//CBH
             }
         }
 

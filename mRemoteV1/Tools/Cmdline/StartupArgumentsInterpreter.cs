@@ -87,22 +87,27 @@ namespace mRemoteNG.Tools.Cmdline
 
             if (string.IsNullOrEmpty(consParam)) return;
             _messageCollector.AddMessage(MessageClass.DebugMsg, "Cmdline arg: loading connections from a custom path");
-            if (File.Exists(args[consParam]) == false)
+
+            if (File.Exists(args[consParam]))
             {
-                if (File.Exists(Path.Combine(GeneralAppInfo.HomePath, args[consParam])))
-                {
-                    Settings.Default.LoadConsFromCustomLocation = true;
-                    Settings.Default.CustomConsPath = Path.Combine(GeneralAppInfo.HomePath, args[consParam]);
-                    return;
-                }
-                if (!File.Exists(Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]))) return;
+                //绝对路径中存在
                 Settings.Default.LoadConsFromCustomLocation = true;
-                Settings.Default.CustomConsPath = Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
+                var consPath = args[consParam];
+                Settings.Default.CustomConsPath = ConnectionsFileInfo.MakeRelativeIfPossible(consPath);
             }
-            else
+            else if (File.Exists(Path.Combine(GeneralAppInfo.HomePath, args[consParam])))
             {
+                //程序根目录中存在
                 Settings.Default.LoadConsFromCustomLocation = true;
-                Settings.Default.CustomConsPath = args[consParam];
+                var consPath = Path.Combine(GeneralAppInfo.HomePath, args[consParam]);
+                Settings.Default.CustomConsPath = ConnectionsFileInfo.MakeRelativeIfPossible(consPath);
+            }
+            else if (File.Exists(Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam])))
+            {
+                //程序配置（conf）目录中存在
+                Settings.Default.LoadConsFromCustomLocation = true;
+                var consPath = Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
+                Settings.Default.CustomConsPath = ConnectionsFileInfo.MakeRelativeIfPossible(consPath);
             }
         }
     }

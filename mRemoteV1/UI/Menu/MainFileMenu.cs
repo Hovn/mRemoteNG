@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.App.Info;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -420,7 +421,7 @@ namespace mRemoteNG.UI.Menu
                 else
                 {
                     Settings.Default.LoadConsFromCustomLocation = true;
-                    Settings.Default.CustomConsPath = newFileName;
+                    Settings.Default.CustomConsPath = ConnectionsFileInfo.MakeRelativeIfPossible(newFileName);//CBH
                 }
             }
         }
