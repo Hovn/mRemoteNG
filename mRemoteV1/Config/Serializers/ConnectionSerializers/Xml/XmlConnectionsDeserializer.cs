@@ -178,7 +178,15 @@ namespace mRemoteNG.Config.Serializers.Xml
                             parentContainer.AddChild(connectionInfo);
                             break;
                         case TreeNodeType.Container:
-                            var containerInfo = new ContainerInfo();
+                            //CBH 修复：容器的ID现保持与文件中一致
+                            string containerId = Guid.NewGuid().ToString();
+                            if (xmlNode.Attributes != null && xmlNode.Attributes["Id"] != null)
+                            {
+                                containerId = xmlNode.Attributes["Id"].Value;
+                                //Console.WriteLine(containerId + "  ---  " + _confVersion);
+                            }
+                            var containerInfo = new ContainerInfo(containerId);
+                            //var containerInfo = new ContainerInfo();
                             
                             if (_confVersion >= 0.9)
                                 containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
