@@ -52,6 +52,7 @@ namespace mRemoteNG.UI.Window
             FilenameColumnHeader.Text = Language.strColumnFilename;
             ArgumentsColumnHeader.Text = Language.strColumnArguments;
             WorkingDirColumnHeader.Text = Language.strWorkingDirColumnHeader;
+            WaitAfterStartColumnHeader.Text = Language.strColumnWaitAfterStart;
             WaitForExitColumnHeader.Text = Language.strColumnWaitForExit;
             TryToIntegrateColumnHeader.Text = Language.strTryToIntegrateColumnHeader;
             RunElevateHeader.Text = Language.strRunElevateHeader;
@@ -68,7 +69,8 @@ namespace mRemoteNG.UI.Window
             ArgumentsLabel.Text = Language.strLabelArguments;
             WorkingDirLabel.Text = Language.strWorkingDirectory;
             OptionsLabel.Text = Language.strLabelOptions;
-            
+
+            WaitAfterStartLabel.Text = Language.strWaitAfterStart;
             WaitForExitCheckBox.Text = Language.strCheckboxWaitForExit;
             BrowseButton.Text = Language.strButtonBrowse;
             BrowseWorkingDir.Text = Language.strButtonBrowse;
@@ -134,6 +136,7 @@ namespace mRemoteNG.UI.Window
             FilenameTextBox.Text = selectedTool?.FileName;
             ArgumentsTextBox.Text = selectedTool?.Arguments;
             WorkingDirTextBox.Text = selectedTool?.WorkingDir;
+            WaitAfterStartTextBox.Text = selectedTool?.WaitAfterStart.ToString() ?? "0";
             WaitForExitCheckBox.Checked = selectedTool?.WaitForExit ?? false;
             TryToIntegrateCheckBox.Checked = selectedTool?.TryIntegrate ?? false;
             ShowOnToolbarCheckBox.Checked = selectedTool?.ShowOnToolbar ?? false;
@@ -258,6 +261,7 @@ namespace mRemoteNG.UI.Window
                 selectedTool.FileName = FilenameTextBox.Text;
                 selectedTool.Arguments = ArgumentsTextBox.Text;
                 selectedTool.WorkingDir = WorkingDirTextBox.Text;
+                selectedTool.WaitAfterStart = int.TryParse(WaitAfterStartTextBox.Text, out var v) ? v : 0;
                 selectedTool.WaitForExit = WaitForExitCheckBox.Checked;
                 selectedTool.TryIntegrate = TryToIntegrateCheckBox.Checked;
                 selectedTool.ShowOnToolbar = ShowOnToolbarCheckBox.Checked;
@@ -325,5 +329,10 @@ namespace mRemoteNG.UI.Window
             e.Text = string.Format("'{0}' cannot be enabled if '{1}' is enabled", Language.strCheckboxWaitForExit, Language.strTryIntegrate);
         }
         #endregion
+
+        private void ToolsListObjView_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
     }
 }

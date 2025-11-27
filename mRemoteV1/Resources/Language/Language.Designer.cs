@@ -1175,6 +1175,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   查找类似 Wait After Start 的本地化字符串。
+        /// </summary>
+        internal static string strColumnWaitAfterStart {
+            get {
+                return ResourceManager.GetString("strColumnWaitAfterStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Wait For Exit 的本地化字符串。
         /// </summary>
         internal static string strColumnWaitForExit {
@@ -7758,6 +7767,15 @@ namespace mRemoteNG {
         internal static string strVncToggleViewOnlyFailed {
             get {
                 return ResourceManager.GetString("strVncToggleViewOnlyFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Wait after start(ms): 的本地化字符串。
+        /// </summary>
+        internal static string strWaitAfterStart {
+            get {
+                return ResourceManager.GetString("strWaitAfterStart", resourceCulture);
             }
         }
         

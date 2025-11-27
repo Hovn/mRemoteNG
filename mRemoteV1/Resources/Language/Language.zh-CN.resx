@@ -370,10 +370,13 @@ VncSharp 版本 {0}</value>
   <data name="strCheckboxUsername" xml:space="preserve">
     <value>用户名</value>
   </data>
-  <data name="strCheckboxWaitForExit" xml:space="preserve">
+    <data name="strWaitAfterStart" xml:space="preserve">
+    <value>启动后等待(毫秒)：</value>
+  </data>
+    <data name="strCheckboxWaitForExit" xml:space="preserve">
     <value>等待退出</value>
   </data>
-  <data name="strCheckForUpdate" xml:space="preserve">
+    <data name="strCheckForUpdate" xml:space="preserve">
     <value>再次检查</value>
   </data>
   <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
@@ -412,10 +415,13 @@ VncSharp 版本 {0}</value>
   <data name="strColumnUsername" xml:space="preserve">
     <value>用户名</value>
   </data>
-  <data name="strColumnWaitForExit" xml:space="preserve">
+    <data name="strColumnWaitAfterStart" xml:space="preserve">
+    <value>启动后等待</value>
+  </data>
+    <data name="strColumnWaitForExit" xml:space="preserve">
     <value>等待退出</value>
   </data>
-  <data name="strCommandExitProgram" xml:space="preserve">
+    <data name="strCommandExitProgram" xml:space="preserve">
     <value>退出(&amp;X) {0}</value>
   </data>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
@@ -464,10 +470,10 @@ VncSharp 版本 {0}</value>
     <value>确实要关闭面板“{0}”？此面板所包含的所有连接将会断开。</value>
   </data>
   <data name="strConfirmDeleteExternalTool" xml:space="preserve">
-    <value>确定要删除外部工具，"{0}"？</value>
+    <value>确定要删除外部工具“{0}”吗？</value>
   </data>
   <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
-    <value>确定要删除外部工具 {0} 吗？</value>
+    <value>确定要删除{0}个外部工具吗？</value>
   </data>
   <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
     <value>确定要删除连接，"{0}"？</value>
