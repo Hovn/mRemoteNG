@@ -161,6 +161,10 @@ namespace mRemoteNG.Tools
             if (_connectionInfo == null) return replacement;
             switch (variable.ToLowerInvariant())
             {
+                //CBH 把GUID也作为可供使用的变量
+                case "guid":
+                    replacement = _connectionInfo.ConstantID;
+                    break;
                 case "name":
                     replacement = _connectionInfo.Name;
                     break;
