@@ -979,6 +979,14 @@ namespace mRemoteNG.UI.Controls
                 // 1. 处理容器分支
                 if (node is ContainerInfo container && nodeType == TreeNodeType.Container)
                 {
+                    //CBH 如果容器节点的【自定义信息】中包含特定字符串(不区分大小写)，则在自身进行执行。ExternalToolTarget/ExecTarget
+                    //Console.WriteLine(container.UserField);
+                    if (container.UserField.ToLowerInvariant().Contains("ExecTarget=self".ToLowerInvariant()))
+                    {
+                        externalTool.Start(node);
+                        return;
+                    }
+
                     if (container.Children.Count == 0)
                         return;
 
