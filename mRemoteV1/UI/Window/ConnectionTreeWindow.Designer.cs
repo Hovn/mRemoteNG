@@ -1,5 +1,6 @@
 
 
+using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree;
 
@@ -14,6 +15,8 @@ namespace mRemoteNG.UI.Window
         internal System.Windows.Forms.ToolStripMenuItem mMenView;
         internal System.Windows.Forms.ToolStripMenuItem mMenViewExpandAllFolders;
         internal System.Windows.Forms.ToolStripMenuItem mMenViewCollapseAllFolders;
+        internal System.Windows.Forms.ToolStripMenuItem mMenViewExpandSelectedNode;
+        internal System.Windows.Forms.ToolStripMenuItem mMenViewCollapseSelectedNode;
         internal System.Windows.Forms.PictureBox PictureBox1;
         internal System.Windows.Forms.ToolStripMenuItem mMenSortAscending;
         internal System.Windows.Forms.ToolStripMenuItem mMenAddConnection;
@@ -37,6 +40,8 @@ namespace mRemoteNG.UI.Window
             this.mMenView = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewExpandAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenViewExpandSelectedNode = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenViewCollapseSelectedNode = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSortAscending = new System.Windows.Forms.ToolStripMenuItem();
             //CBH 增加启用/禁用拖拽的开关
             this.mMenDropOpt = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,7 +145,7 @@ namespace mRemoteNG.UI.Window
                 this.mMenAddConnection,
                 this.mMenAddFolder,
                 this.mMenView,
-                //this.mMenSortAscending  //CBH 取消排序按钮
+                //this.mMenSortAscending  //CBH 不显示升序排序按钮
                 this.mMenDropOpt
             });
             this.msMain.Location = new System.Drawing.Point(0, 0);
@@ -171,8 +176,11 @@ namespace mRemoteNG.UI.Window
             // 
             this.mMenView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.mMenView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mMenViewExpandAllFolders,
-            this.mMenViewCollapseAllFolders});
+                this.mMenViewExpandAllFolders,
+                this.mMenViewCollapseAllFolders,
+                new ToolStripSeparator(),//CBH 分割线
+                this.mMenViewExpandSelectedNode,
+                this.mMenViewCollapseSelectedNode});
             this.mMenView.Image = global::mRemoteNG.Resources.View;
             this.mMenView.Name = "mMenView";
             this.mMenView.Size = new System.Drawing.Size(28, 20);
@@ -191,6 +199,20 @@ namespace mRemoteNG.UI.Window
             this.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders";
             this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(172, 22);
             this.mMenViewCollapseAllFolders.Text = "Collapse all folders";
+            // 
+            // mMenViewExpandSelectedNode
+            // 
+            this.mMenViewExpandSelectedNode.Image = global::mRemoteNG.Resources.Expand;
+            this.mMenViewExpandSelectedNode.Name = "mMenViewExpandSelectedNode";
+            this.mMenViewExpandSelectedNode.Size = new System.Drawing.Size(172, 22);
+            this.mMenViewExpandSelectedNode.Text = "Expand selected node";
+            // 
+            // mMenViewCollapseSelectedNode
+            // 
+            this.mMenViewCollapseSelectedNode.Image = global::mRemoteNG.Resources.Collapse;
+            this.mMenViewCollapseSelectedNode.Name = "mMenViewCollapseSelectedNode";
+            this.mMenViewCollapseSelectedNode.Size = new System.Drawing.Size(172, 22);
+            this.mMenViewCollapseSelectedNode.Text = "Collapse selected node";
             // 
             // mMenSortAscending
             // 

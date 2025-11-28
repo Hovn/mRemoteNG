@@ -1121,6 +1121,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   查找类似 Collapse selected node 的本地化字符串。
+        /// </summary>
+        internal static string strCollapseSelectedNode {
+            get {
+                return ResourceManager.GetString("strCollapseSelectedNode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Arguments 的本地化字符串。
         /// </summary>
         internal static string strColumnArguments {
@@ -2072,6 +2081,15 @@ namespace mRemoteNG {
         internal static string strExpandAllFolders {
             get {
                 return ResourceManager.GetString("strExpandAllFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Expand selected node 的本地化字符串。
+        /// </summary>
+        internal static string strExpandSelectedNode {
+            get {
+                return ResourceManager.GetString("strExpandSelectedNode", resourceCulture);
             }
         }
         

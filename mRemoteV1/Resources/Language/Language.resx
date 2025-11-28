@@ -2756,4 +2756,10 @@ Development Channel includes Alpha, Beta and Release Candidates.</value>
   <data name="strClose" xml:space="preserve">
     <value>Close</value>
   </data>
+    <data name="strExpandSelectedNode" xml:space="preserve">
+    <value>Expand selected node</value>
+  </data>
+    <data name="strCollapseSelectedNode" xml:space="preserve">
+    <value>Collapse selected node</value>
+  </data>
 </root>

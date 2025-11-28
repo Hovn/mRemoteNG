@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Controls
     {
         private ToolStripMenuItem _cMenTreeAddConnection;
         private ToolStripMenuItem _cMenTreeAddFolder;
-        private ToolStripSeparator _cMenTreeSep1;
+        private ToolStripSeparator _toolStripSeparator_1;
         private ToolStripMenuItem _cMenTreeConnect;
         private ToolStripMenuItem _cMenTreeConnectWithOptions;
         private ToolStripMenuItem _cMenTreeConnectWithOptionsDontConnectToConsoleSession;
@@ -29,22 +29,24 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeConnectWithOptionsNoCredentials;
         private ToolStripMenuItem _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting;
         private ToolStripMenuItem _cMenTreeDisconnect;
-        private ToolStripSeparator _cMenTreeSep2;
+        private ToolStripSeparator _toolStripSeparator_2;
         private ToolStripMenuItem _cMenTreeToolsTransferFile;
         private ToolStripMenuItem _cMenTreeToolsSort;
         private ToolStripMenuItem _cMenTreeToolsSortAscending;
         private ToolStripMenuItem _cMenTreeToolsSortDescending;
-        private ToolStripSeparator _cMenTreeSep3;
+        private ToolStripSeparator _toolStripSeparator_3;
         private ToolStripMenuItem _cMenTreeRename;
         private ToolStripMenuItem _cMenTreeDelete;
-        private ToolStripSeparator _cMenTreeSep4;
+        private ToolStripSeparator _toolStripSeparator_4;
         private ToolStripMenuItem _cMenTreeMoveUp;
         private ToolStripMenuItem _cMenTreeMoveDown;
+        private ToolStripMenuItem _cMenTreeExpand;
+        private ToolStripMenuItem _cMenTreeCollapse;
         private ToolStripMenuItem _cMenTreeToolsExternalApps;
         private ToolStripMenuItem _cMenTreeDuplicate;
         private ToolStripMenuItem _cMenTreeImport;
         private ToolStripMenuItem _cMenTreeExportFile;
-        private ToolStripSeparator _toolStripSeparator1;
+        private ToolStripSeparator _toolStripSeparator_5;
         private ToolStripMenuItem _cMenTreeImportFile;
         private ToolStripMenuItem _cMenTreeImportActiveDirectory;
         private ToolStripMenuItem _cMenTreeImportPortScan;
@@ -100,28 +102,31 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsNoCredentials = new ToolStripMenuItem();
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting = new ToolStripMenuItem();
             _cMenTreeDisconnect = new ToolStripMenuItem();
-            _cMenTreeSep1 = new ToolStripSeparator();
+            _toolStripSeparator_1 = new ToolStripSeparator();
             _cMenTreeToolsExternalApps = new ToolStripMenuItem();
             _cMenTreeToolsTransferFile = new ToolStripMenuItem();
-            _cMenTreeSep2 = new ToolStripSeparator();
+            _toolStripSeparator_2 = new ToolStripSeparator();
             _cMenTreeDuplicate = new ToolStripMenuItem();
             _cMenTreeRename = new ToolStripMenuItem();
             _cMenTreeDelete = new ToolStripMenuItem();
-            _cMenTreeSep3 = new ToolStripSeparator();
+            _toolStripSeparator_3 = new ToolStripSeparator();
             _cMenTreeImport = new ToolStripMenuItem();
             _cMenTreeImportFile = new ToolStripMenuItem();
             _cMenTreeImportActiveDirectory = new ToolStripMenuItem();
             _cMenTreeImportPortScan = new ToolStripMenuItem();
             _cMenTreeExportFile = new ToolStripMenuItem();
-            _cMenTreeSep4 = new ToolStripSeparator();
+            _toolStripSeparator_4 = new ToolStripSeparator();
             _cMenTreeAddConnection = new ToolStripMenuItem();
             _cMenTreeAddFolder = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
+            _toolStripSeparator_5 = new ToolStripSeparator();
             _cMenTreeToolsSort = new ToolStripMenuItem();
             _cMenTreeToolsSortAscending = new ToolStripMenuItem();
             _cMenTreeToolsSortDescending = new ToolStripMenuItem();
             _cMenTreeMoveUp = new ToolStripMenuItem();
             _cMenTreeMoveDown = new ToolStripMenuItem();
+            _cMenTreeExpand = new ToolStripMenuItem();
+            _cMenTreeExpand.Visible = false;  //CBH 不显示
+            _cMenTreeCollapse = new ToolStripMenuItem();
 
 
             // 
@@ -132,20 +137,22 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeConnect,
                 _cMenTreeConnectWithOptions,
                 _cMenTreeDisconnect,
-                _cMenTreeSep1,
+                _toolStripSeparator_1,
                 _cMenTreeToolsExternalApps,
                 _cMenTreeToolsTransferFile,
-                _cMenTreeSep2,
+                _toolStripSeparator_2,
                 _cMenTreeDuplicate,
                 _cMenTreeRename,
                 _cMenTreeDelete,
-                _cMenTreeSep3,
+                _toolStripSeparator_3,
                 _cMenTreeImport,
                 _cMenTreeExportFile,
-                _cMenTreeSep4,
+                _toolStripSeparator_4,
                 _cMenTreeAddConnection,
                 _cMenTreeAddFolder,
-                _toolStripSeparator1,
+                _toolStripSeparator_5,
+                _cMenTreeExpand,    //CBH 展开(隐藏，但响应快捷键)
+                _cMenTreeCollapse,  //CBH 折叠
                 _cMenTreeToolsSort,
                 _cMenTreeMoveUp,
                 _cMenTreeMoveDown
@@ -226,8 +233,8 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeSep1
             // 
-            _cMenTreeSep1.Name = "_cMenTreeSep1";
-            _cMenTreeSep1.Size = new System.Drawing.Size(196, 6);
+            _toolStripSeparator_1.Name = "_toolStripSeparator_1";
+            _toolStripSeparator_1.Size = new System.Drawing.Size(196, 6);
             // 
             // cMenTreeToolsExternalApps
             // 
@@ -246,8 +253,8 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeSep2
             // 
-            _cMenTreeSep2.Name = "_cMenTreeSep2";
-            _cMenTreeSep2.Size = new System.Drawing.Size(196, 6);
+            _toolStripSeparator_2.Name = "_toolStripSeparator_2";
+            _toolStripSeparator_2.Size = new System.Drawing.Size(196, 6);
             // 
             // cMenTreeDuplicate
             // 
@@ -275,8 +282,8 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeSep3
             // 
-            _cMenTreeSep3.Name = "_cMenTreeSep3";
-            _cMenTreeSep3.Size = new System.Drawing.Size(196, 6);
+            _toolStripSeparator_3.Name = "_toolStripSeparator_3";
+            _toolStripSeparator_3.Size = new System.Drawing.Size(196, 6);
             // 
             // cMenTreeImport
             // 
@@ -319,8 +326,8 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeSep4
             // 
-            _cMenTreeSep4.Name = "_cMenTreeSep4";
-            _cMenTreeSep4.Size = new System.Drawing.Size(196, 6);
+            _toolStripSeparator_4.Name = "_toolStripSeparator_4";
+            _toolStripSeparator_4.Size = new System.Drawing.Size(196, 6);
             // 
             // cMenTreeAddConnection
             // 
@@ -338,10 +345,10 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeAddFolder.Text = "New Folder";
             _cMenTreeAddFolder.Click += OnAddFolderClicked;
             // 
-            // ToolStripSeparator1
+            // cMenTreeSep5
             // 
-            _toolStripSeparator1.Name = "_toolStripSeparator1";
-            _toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
+            _toolStripSeparator_5.Name = "_toolStripSeparator_5";
+            _toolStripSeparator_5.Size = new System.Drawing.Size(196, 6);
             // 
             // cMenTreeToolsSort
             // 
@@ -384,6 +391,22 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Size = new System.Drawing.Size(199, 22);
             _cMenTreeMoveDown.Text = "Move down";
             _cMenTreeMoveDown.Click += OnMoveDownClicked;
+            // 
+            // _cMenTreeExpand
+            // 
+            _cMenTreeExpand.Image = Resources.Expand;
+            _cMenTreeExpand.Name = "_cMenTreeExpand";
+            _cMenTreeExpand.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeExpand.Text = "Expand";
+            _cMenTreeExpand.Click += OnExpandClicked;
+            // 
+            // _cMenTreeCollapse
+            // 
+            _cMenTreeCollapse.Image = Resources.Collapse;
+            _cMenTreeCollapse.Name = "_cMenTreeCollapse";
+            _cMenTreeCollapse.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeCollapse.Text = "Collapse";
+            _cMenTreeCollapse.Click += OnCollapseClicked;
         }
 
         private void ApplyLanguage()
@@ -418,6 +441,8 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsSortDescending.Text = Language.strSortDesc;
             _cMenTreeMoveUp.Text = Language.strMoveUp;
             _cMenTreeMoveDown.Text = Language.strMoveDown;
+            _cMenTreeExpand.Text = Language.strExpandSelectedNode;
+            _cMenTreeCollapse.Text = Language.strCollapseSelectedNode;
         }
 
         //CBH 根据 选中节点 类型的不同，菜单项针对性进行启用或禁用
@@ -496,7 +521,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Enabled = false;
         }
 
-        //PuTTY会话已保存 根节点
+        //PuTTY会话已保存根节点
         internal void ShowHideMenuItemsForRootPuttyNode()
         {
             _cMenTreeConnect.Enabled = false;
@@ -521,7 +546,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Enabled = false;
         }
 
-        //连接 根节点  //的表示 true 启用
+        //连接根节点，注释掉的行默认值为true（启用）
         internal void ShowHideMenuItemsForRootConnectionNode()
         {
             _cMenTreeConnect.Enabled = false;
@@ -566,7 +591,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeToolsTransferFile.Enabled = false;
         }
 
-        //PuTTY会话 常规节点
+        //PuTTY会话常规节点
         internal void ShowHideMenuItemsForPuttyNode(ConnectionInfo connectionInfo)
         {
             //连接选项子菜单
@@ -594,7 +619,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Enabled = false;
         }
 
-        //默认节点（服务器 常规节点）
+        //默认节点（服务器连接常规节点）
         internal void ShowHideMenuItemsForConnectionNode(ConnectionInfo connectionInfo)
         {
             //如果没有打开的连接。则禁用‘断开连接’
@@ -622,6 +647,8 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDelete.ShortcutKeys = Keys.None;
             _cMenTreeMoveUp.ShortcutKeys = Keys.None;
             _cMenTreeMoveDown.ShortcutKeys = Keys.None;
+            _cMenTreeExpand.ShortcutKeys = Keys.None;
+            _cMenTreeCollapse.ShortcutKeys = Keys.None;
         }
 
         internal void EnableShortcutKeys()
@@ -631,7 +658,13 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeRename.ShortcutKeys = Keys.F2;
             _cMenTreeDelete.ShortcutKeys = Keys.Delete;
             _cMenTreeMoveUp.ShortcutKeys = Keys.Control | Keys.Up;
+            _cMenTreeMoveUp.ShortcutKeyDisplayString = "Ctrl+↑";
             _cMenTreeMoveDown.ShortcutKeys = Keys.Control | Keys.Down;
+            _cMenTreeMoveDown.ShortcutKeyDisplayString = "Ctrl+↓";
+            _cMenTreeExpand.ShortcutKeys = Keys.Control | Keys.Oemplus; //CBH 主键盘+号
+            _cMenTreeExpand.ShortcutKeyDisplayString = "Ctrl++";
+            _cMenTreeCollapse.ShortcutKeys = Keys.Control | Keys.OemMinus; //CBH 主键盘-号
+            _cMenTreeCollapse.ShortcutKeyDisplayString = "Ctrl+-";
         }
 
         //启用所有菜单项及子菜单项
@@ -920,6 +953,36 @@ namespace mRemoteNG.UI.Controls
         private void OnMoveDownClicked(object sender, EventArgs e)
         {
             _connectionTree.SelectedNode.Parent.DemoteChild(_connectionTree.SelectedNode);
+        }
+
+        private void OnExpandClicked(object sender, EventArgs e)
+        {
+            _connectionTree.Expand(_connectionTree.SelectedNode);
+        }
+
+        private void OnCollapseClicked(object sender, EventArgs e)
+        {
+            ConnectionInfo node = _connectionTree.SelectedNode;
+            if (node != null)
+            {
+                TreeNodeType nodeType = node.GetTreeNodeType();
+                if (node is ContainerInfo container && nodeType == TreeNodeType.Container)//CBH 容器节点
+                {
+                    node = container.IsExpanded ? container : container.Parent;
+                }
+                else if (nodeType == TreeNodeType.Connection)//CBH 常规节点
+                {
+                    node = node.Parent;
+                }
+            }
+
+            if (node != null && node.GetTreeNodeType()!= TreeNodeType.Root)
+            {
+                _connectionTree.Collapse(node);
+                _connectionTree.Expand(_connectionTree.GetRootConnectionNode());
+                _connectionTree.SelectObject(node);
+                _connectionTree.EnsureModelVisible(node);
+            }
         }
 
         private void OnExternalToolClicked(object sender, EventArgs e)

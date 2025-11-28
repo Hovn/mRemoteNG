@@ -2029,10 +2029,10 @@ VncSharp 版本 {0}</value>
     <value>排序</value>
   </data>
   <data name="strSortAsc" xml:space="preserve">
-    <value>升序(A至Z)</value>
+    <value>升序（A→Z）</value>
   </data>
   <data name="strSortDesc" xml:space="preserve">
-    <value>降序(Z至A)</value>
+    <value>降序（Z→A）</value>
   </data>
   <data name="strSpecialKeys" xml:space="preserve">
     <value>特殊键</value>
@@ -2729,5 +2729,11 @@ Development: 开发版本</value>
   </data>
   <data name="strClose" xml:space="preserve">
     <value>关闭</value>
+  </data>
+    <data name="strExpandSelectedNode" xml:space="preserve">
+    <value>展开选中节点</value>
+  </data>
+    <data name="strCollapseSelectedNode" xml:space="preserve">
+    <value>折叠选中节点</value>
   </data>
 </root>

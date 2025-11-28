@@ -1,7 +1,9 @@
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
+using mRemoteNG.Container;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -81,6 +84,8 @@ namespace mRemoteNG.UI.Window
             mMenView.ToolTipText = Language.strMenuView.Replace("&", "");
             mMenViewExpandAllFolders.Text = Language.strExpandAllFolders;
             mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders;
+            mMenViewExpandSelectedNode.Text = Language.strExpandSelectedNode;
+            mMenViewCollapseSelectedNode.Text = Language.strCollapseSelectedNode;
             mMenSortAscending.ToolTipText = Language.strSortAsc;
             mMenDropOpt.ToolTipText = Language.strDragDropSwitch;
 
@@ -172,33 +177,54 @@ namespace mRemoteNG.UI.Window
         #region Top Menu
         private void SetMenuEventHandlers()
         {
-            mMenViewExpandAllFolders.Click += (sender, args) => olvConnections.ExpandAll();
+            //CBH 连接树窗口顶部按钮菜单-展开所有/折叠所有
+            mMenViewExpandAllFolders.Click += (sender, args) =>
+            {
+                olvConnections.ExpandAll();
+            };
             mMenViewCollapseAllFolders.Click += (sender, args) =>
             {
                 olvConnections.CollapseAll();
                 olvConnections.Expand(olvConnections.GetRootConnectionNode());
             };
+
+            //CBH 连接树窗口顶部按钮菜单-展开当前/折叠选中节点
+            mMenViewExpandSelectedNode.Click += (sender, args) =>
+            {
+                olvConnections.Expand(olvConnections.SelectedNode);
+            };
+            mMenViewExpandSelectedNode.ShortcutKeys = Keys.Control | Keys.Add;//CBH 小键盘+号
+            mMenViewExpandSelectedNode.ShortcutKeyDisplayString = "Ctrl++";
+
+            mMenViewCollapseSelectedNode.Click += (sender, args) =>
+            {
+                ConnectionInfo node = olvConnections.SelectedNode;
+                if(node != null)
+                {
+                    TreeNodeType nodeType = node.GetTreeNodeType();
+                    if (node is ContainerInfo container && nodeType == TreeNodeType.Container)//CBH 容器节点
+                    {
+                        node = container.IsExpanded?container:container.Parent;
+                    }else if (nodeType == TreeNodeType.Connection)//CBH 常规节点
+                    {
+                        node = node.Parent;
+                    }
+                }
+
+                if (node != null && node.GetTreeNodeType() != TreeNodeType.Root)
+                {
+                    olvConnections.Collapse(node);
+                    olvConnections.Expand(olvConnections.GetRootConnectionNode());
+                    JumpToNode(node);
+                }
+            };
+            mMenViewCollapseSelectedNode.ShortcutKeys = Keys.Control | Keys.Subtract;//CBH 小键盘-号
+            mMenViewCollapseSelectedNode.ShortcutKeyDisplayString = "Ctrl+-";
+
+            //CBH 连接树窗口顶部按钮菜单-升序排序
             mMenSortAscending.Click += (sender, args) => olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
 
-            //CBH 拖拽开关的切换处理逻辑
-            //mMenDropOpt.CheckedChanged += delegate (object sender, EventArgs e)
-            //{
-            //    ToolStripMenuItem toolStripMenuItem = sender as ToolStripMenuItem;
-            //    if (toolStripMenuItem != null)
-            //    {
-            //        bool @checked = toolStripMenuItem.Checked;
-            //        if (@checked)
-            //        {
-            //            this.mMenDropOpt.Image = Resources.Drag_Icon_Enable;
-            //        }
-            //        else
-            //        {
-            //            this.mMenDropOpt.Image = Resources.Drag_Icon_Disable;
-            //        }
-            //        this.olvConnections.AllowDrop = @checked;
-            //    }
-            //};
-            //CBH 拖拽开关的切换处理逻辑(lambda)
+            //CBH 连接树窗口顶部按钮菜单-拖拽开关(lambda)
             mMenDropOpt.CheckedChanged += (sender, eventArgs) =>
             {
                 bool check = ((ToolStripMenuItem)sender).Checked;
