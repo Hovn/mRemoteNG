@@ -59,8 +59,8 @@ namespace mRemoteNG.Tools
             set
             {
                 // WaitAfterStart cannot be turned on when TryIntegrate is true
-                if (TryIntegrate)
-                    return;
+                //if (TryIntegrate)
+                //    return;
                 SetField(ref _waitAfterStart, value, nameof(WaitAfterStart));
             }
         }
@@ -169,7 +169,7 @@ namespace mRemoteNG.Tools
             SetProcessProperties(process, ConnectionInfo);
             process.Start();
 
-            Console.WriteLine("WaitForExit:"+ WaitForExit+ " , WaitAfterStart:"+ WaitAfterStart);
+            //Console.WriteLine("CBH WaitForExit:"+ WaitForExit+ " , WaitAfterStart:"+ WaitAfterStart);
             if (WaitForExit)  
             {
                 process.WaitForExit();
