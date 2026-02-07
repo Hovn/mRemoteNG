@@ -310,7 +310,7 @@ namespace mRemoteNG.UI.Window
             this.WaitAfterStartTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.WaitAfterStartTextBox.Location = new System.Drawing.Point(272, 143);
             this.WaitAfterStartTextBox.Name = "WaitAfterStartTextBox";
-            this.WaitAfterStartTextBox.NumberOnly = true;
+            //this.WaitAfterStartTextBox.NumberOnly = true;  //保存时再判断合法性
             this.WaitAfterStartTextBox.Size = new System.Drawing.Size(45, 20);
             this.WaitAfterStartTextBox.TabIndex = 7;
             this.WaitAfterStartTextBox.Text = "0";

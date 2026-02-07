@@ -90,6 +90,7 @@ namespace mRemoteNG.UI.Window
             mMenDropOpt.ToolTipText = Language.strDragDropSwitch;
 
             txtSearch.Text = Language.strSearchPrompt;
+            PictureBox1ToolTip.SetToolTip(this.PictureBox1, Language.strSearchPrompt);
         }
 
         private new void ApplyTheme()
@@ -271,14 +272,22 @@ namespace mRemoteNG.UI.Window
                 }
                 else if (e.KeyCode == Keys.Up)
                 {
-                    var match = olvConnections.NodeSearcher.PreviousMatch();
-                    JumpToNode(match);
+                    if (!Settings.Default.UseFilterSearch)//添加条件：需未勾选 FilterSearchMatchesInConnectionTree 
+                    {
+                        var match = olvConnections.NodeSearcher.PreviousMatch();
+                        JumpToNode(match);
+                        RefreshSearchMatchTip(match);
+                    }
                     e.Handled = true;
                 }
                 else if (e.KeyCode == Keys.Down)
                 {
-                    var match = olvConnections.NodeSearcher.NextMatch();
-                    JumpToNode(match);
+                    if (!Settings.Default.UseFilterSearch)//添加条件：需未勾选 FilterSearchMatchesInConnectionTree 
+                    {
+                        var match = olvConnections.NodeSearcher.NextMatch();
+                        JumpToNode(match);
+                        RefreshSearchMatchTip(match);
+                    }
                     e.Handled = true;
                 }
                 else
@@ -311,9 +320,10 @@ namespace mRemoteNG.UI.Window
             }
             else
             {
-                if (txtSearch.Text == "") return;
+                //if (txtSearch.Text == "") return;
                 olvConnections.NodeSearcher?.SearchByName(txtSearch.Text);
                 JumpToNode(olvConnections.NodeSearcher?.CurrentMatch);
+                RefreshSearchMatchTip();
             }
         }
 
@@ -327,6 +337,12 @@ namespace mRemoteNG.UI.Window
             ExpandParentsRecursive(connectionInfo);
             olvConnections.SelectObject(connectionInfo);
             olvConnections.EnsureModelVisible(connectionInfo);
+        }
+        private void RefreshSearchMatchTip(ConnectionInfo matchItem = null)//送入null表示使用当前默认
+        {
+            //PictureBox1ToolTip.SetToolTip(this.PictureBox1, Language.strSearchPrompt);
+            PictureBox1ToolTip.SetToolTip(this.PictureBox1, olvConnections.NodeSearcher == null ? "null" : olvConnections.NodeSearcher.GetItemMatchPositionDesc(matchItem));
+
         }
 
         private void ExpandParentsRecursive(ConnectionInfo connectionInfo)

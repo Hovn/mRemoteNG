@@ -261,7 +261,7 @@ namespace mRemoteNG.UI.Window
                 selectedTool.FileName = FilenameTextBox.Text;
                 selectedTool.Arguments = ArgumentsTextBox.Text;
                 selectedTool.WorkingDir = WorkingDirTextBox.Text;
-                selectedTool.WaitAfterStart = int.TryParse(WaitAfterStartTextBox.Text, out var v) ? v : 0;
+                selectedTool.WaitAfterStart = (int.TryParse(WaitAfterStartTextBox.Text, out var v) && v>=0) ? v : 0;
                 selectedTool.WaitForExit = WaitForExitCheckBox.Checked;
                 selectedTool.TryIntegrate = TryToIntegrateCheckBox.Checked;
                 selectedTool.ShowOnToolbar = ShowOnToolbarCheckBox.Checked;

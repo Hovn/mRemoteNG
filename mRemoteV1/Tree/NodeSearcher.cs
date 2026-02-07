@@ -9,7 +9,7 @@ namespace mRemoteNG.Tree
     {
         private readonly ConnectionTreeModel _connectionTreeModel;
 
-        private List<ConnectionInfo> Matches { get; set; }
+        public List<ConnectionInfo> Matches { get; private set; }
         public ConnectionInfo CurrentMatch { get; private set; }
 
 
@@ -38,6 +38,7 @@ namespace mRemoteNG.Tree
 
         public ConnectionInfo NextMatch()
         {
+            if (CurrentMatch == null || Matches == null) return null;
             var currentMatchIndex = Matches.IndexOf(CurrentMatch);
             if (!CurrentMatchIsTheLastMatchInTheList())
                 CurrentMatch = Matches[currentMatchIndex + 1];
@@ -52,6 +53,7 @@ namespace mRemoteNG.Tree
 
         public ConnectionInfo PreviousMatch()
         {
+            if (CurrentMatch == null || Matches == null) return null;
             var currentMatchIndex = Matches.IndexOf(CurrentMatch);
             if (!CurrentMatchIsTheFirstMatchInTheList())
                 CurrentMatch = Matches[currentMatchIndex - 1];
@@ -69,5 +71,15 @@ namespace mRemoteNG.Tree
             Matches = new List<ConnectionInfo>();
             CurrentMatch = null;
         }
+
+        public string GetItemMatchPositionDesc(ConnectionInfo item)
+        {
+            //if (CurrentMatch == null || Matches == null) return "0/0";
+            if(item == null) item=CurrentMatch;
+            var pos = Matches?.IndexOf(item) + 1;
+            var count = Matches?.Count;
+            return pos+"/"+count;
+        }
+
     }
 }

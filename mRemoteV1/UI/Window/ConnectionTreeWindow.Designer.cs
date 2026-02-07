@@ -18,6 +18,7 @@ namespace mRemoteNG.UI.Window
         internal System.Windows.Forms.ToolStripMenuItem mMenViewExpandSelectedNode;
         internal System.Windows.Forms.ToolStripMenuItem mMenViewCollapseSelectedNode;
         internal System.Windows.Forms.PictureBox PictureBox1;
+        internal System.Windows.Forms.ToolTip PictureBox1ToolTip;
         internal System.Windows.Forms.ToolStripMenuItem mMenSortAscending;
         internal System.Windows.Forms.ToolStripMenuItem mMenAddConnection;
         internal System.Windows.Forms.ToolStripMenuItem mMenAddFolder;
@@ -33,6 +34,7 @@ namespace mRemoteNG.UI.Window
             this.olvConnections = new mRemoteNG.UI.Controls.ConnectionTree();
             this.pnlConnections = new System.Windows.Forms.Panel();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PictureBox1ToolTip = new System.Windows.Forms.ToolTip();
             this.txtSearch = new Controls.Base.NGTextBox();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.mMenAddConnection = new System.Windows.Forms.ToolStripMenuItem();

@@ -2618,7 +2618,7 @@ mRemoteNG 将退出并安装更新。</value>
     <value>每次编辑后保存连接</value>
   </data>
   <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
-    <value>在连接树中筛选搜索匹配项</value>
+    <value>搜索时，在连接树中仅显示匹配项</value>
   </data>
   <data name="TestConnection" xml:space="preserve">
     <value>测试连接</value>
