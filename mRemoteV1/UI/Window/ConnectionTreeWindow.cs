@@ -91,6 +91,7 @@ namespace mRemoteNG.UI.Window
 
             txtSearch.Text = Language.strSearchPrompt;
             PictureBox1ToolTip.SetToolTip(this.PictureBox1, Language.strSearchPrompt);
+            //RefreshSearchMatchTip(null);
         }
 
         private new void ApplyTheme()
@@ -269,6 +270,8 @@ namespace mRemoteNG.UI.Window
                 {
                     e.Handled = true;
                     olvConnections.Focus();
+                    PictureBox1ToolTip.SetToolTip(this.PictureBox1, Language.strSearchPrompt);
+                    //RefreshSearchMatchTip(null);
                 }
                 else if (e.KeyCode == Keys.Up)
                 {
@@ -321,9 +324,10 @@ namespace mRemoteNG.UI.Window
             else
             {
                 //if (txtSearch.Text == "") return;
-                olvConnections.NodeSearcher?.SearchByName(txtSearch.Text);
-                JumpToNode(olvConnections.NodeSearcher?.CurrentMatch);
-                RefreshSearchMatchTip();
+                var Matches = olvConnections.NodeSearcher?.SearchByName(txtSearch.Text);//执行名称搜索
+                ConnectionInfo CurrentMatch = olvConnections.NodeSearcher?.CurrentMatch;
+                JumpToNode(CurrentMatch);
+                RefreshSearchMatchTip(CurrentMatch);
             }
         }
 
@@ -338,10 +342,10 @@ namespace mRemoteNG.UI.Window
             olvConnections.SelectObject(connectionInfo);
             olvConnections.EnsureModelVisible(connectionInfo);
         }
-        private void RefreshSearchMatchTip(ConnectionInfo matchItem = null)//送入null表示使用当前默认
+        private void RefreshSearchMatchTip(ConnectionInfo matchItem = null)//入参如为null，将使用NodeSearcher中的当前匹配值
         {
             //PictureBox1ToolTip.SetToolTip(this.PictureBox1, Language.strSearchPrompt);
-            PictureBox1ToolTip.SetToolTip(this.PictureBox1, olvConnections.NodeSearcher == null ? "null" : olvConnections.NodeSearcher.GetItemMatchPositionDesc(matchItem));
+            PictureBox1ToolTip.SetToolTip(this.PictureBox1, olvConnections.NodeSearcher == null ? "NodeSearcher is null!" : olvConnections.NodeSearcher.GetItemMatchPositionDesc(matchItem));
 
         }
 
