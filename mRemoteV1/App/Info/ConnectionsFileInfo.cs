@@ -53,7 +53,7 @@ namespace mRemoteNG.App.Info
 
                 //Uri 方式
                 string subPath = new Uri(baseDir).MakeRelativeUri(new Uri(targetPath)).ToString().Replace('/', Path.DirectorySeparatorChar);
-                Console.WriteLine(subPath);
+                //Console.WriteLine(subPath);
 
                 //截取方式：去掉相同前缀，再删掉可能多余的首个分隔符
                 //string subPath2 = targetPath.Substring(baseDir.Length).TrimStart(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);

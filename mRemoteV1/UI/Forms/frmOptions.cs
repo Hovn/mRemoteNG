@@ -119,7 +119,7 @@ namespace mRemoteNG.UI.Forms
         {
             foreach (var page in _pages.Values)
             {
-                Debug.WriteLine(page.PageName);
+                //Debug.WriteLine(page.PageName);
                 page.SaveSettings();
             }
             Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
