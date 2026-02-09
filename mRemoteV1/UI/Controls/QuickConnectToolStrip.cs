@@ -73,6 +73,9 @@ namespace mRemoteNG.UI.Controls
             _cmbQuickConnect.Margin = new Padding(1, 0, 3, 0);
             _cmbQuickConnect.Name = "cmbQuickConnect";
             _cmbQuickConnect.Size = new System.Drawing.Size(200, 25);
+            //Console.WriteLine("_cmbQuickConnect.Font : " + _cmbQuickConnect.Font);
+            //_cmbQuickConnect.Font : [Font: Name=Microsoft YaHei UI, Size=9, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+            _cmbQuickConnect.Font = new System.Drawing.Font("Segoe UI", 7.5F);  // 小字体 = 矮高度
             _cmbQuickConnect.ConnectRequested += cmbQuickConnect_ConnectRequested;
             _cmbQuickConnect.ProtocolChanged += cmbQuickConnect_ProtocolChanged;
             // 
@@ -80,10 +83,10 @@ namespace mRemoteNG.UI.Controls
             // 
             Dock = DockStyle.None;
             Items.AddRange(new ToolStripItem[] {
-            _lblQuickConnect,
-            _cmbQuickConnect,
-            _btnQuickConnect,
-            _btnConnections});
+                _lblQuickConnect,
+                _cmbQuickConnect,
+                _btnQuickConnect,
+                _btnConnections});
             Location = new System.Drawing.Point(3, 24);
             MaximumSize = new System.Drawing.Size(0, 25);
             Name = "tsQuickConnect";
